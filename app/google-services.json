@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "617390049775",
+    "firebase_url": "https://prectify-38819.firebaseio.com",
+    "project_id": "prectify-38819",
+    "storage_bucket": "prectify-38819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617390049775:android:6c841f6d501c673800ce1a",
+        "android_client_info": {
+          "package_name": "com.example.prectify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617390049775-uk2p90r7u06oipca8osbuotp7cdn5hp7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prectify",
+            "certificate_hash": "1a1ac400775997652882349a6427f4aa18507081"
+          }
+        },
+        {
+          "client_id": "617390049775-mh0fhm9a2mo6cvsjm3e0be6uslka9ie7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIbNky3fHy8K-ntKWdRDYfA_UEya9xIrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617390049775-mh0fhm9a2mo6cvsjm3e0be6uslka9ie7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
