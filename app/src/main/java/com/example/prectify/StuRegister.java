@@ -16,9 +16,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class StuRegister extends AppCompatActivity {
     Button btnRegister;
@@ -53,32 +50,23 @@ public class StuRegister extends AppCompatActivity {
                 etpwd.requestFocus();
                 return;
             }
-            if (!(email.isEmpty() && password.isEmpty()))
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(StuRegister.this, new OnCompleteListener<AuthResult>() {
+            if (!(email.isEmpty() && password.isEmpty())){
+                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener( StuRegister.this , new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        pgb.setVisibility(View.VISIBLE);
-                        if (task.isSuccessful()) {
-                            finish();
-                            Intent intent=new Intent(StuRegister.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        } else {
-                            pgb.setVisibility(View.INVISIBLE);
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_LONG).show();
-                            } catch (FirebaseAuthEmailException e) {
-                                Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
-                            } catch (FirebaseAuthException e) {
-                                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                    public void onComplete ( @NonNull Task<AuthResult> task ) {
+                        pgb.setVisibility( View.VISIBLE );
+                        if(task.isSuccessful()){
+                            pgb.setVisibility( View.INVISIBLE );
+                            startActivity( new Intent(getApplicationContext(),MainActivity.class) );
+                            Toast.makeText( StuRegister.this,"registration successful",Toast.LENGTH_SHORT ).show();
+                        }
+                        if(!task.isSuccessful()){
+                            pgb.setVisibility( View.INVISIBLE );
+                            Toast.makeText( StuRegister.this,"registration unsuccessful, please try again",Toast.LENGTH_SHORT ).show();
                         }
                     }
-                });
+                } );
+            }
             else{
                 Toast.makeText( StuRegister.this,"Error occurred",Toast.LENGTH_SHORT ).show();
             }
