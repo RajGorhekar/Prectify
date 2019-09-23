@@ -1,6 +1,7 @@
 package com.example.prectify;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,17 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 
 public class StuRegister extends AppCompatActivity {
     Button btnRegister;
     EditText etemailId;
     EditText etpwd ;
     ProgressBar pgb;
-
     private FirebaseAuth mAuth;
+    SharedPreferences sr;
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -36,59 +35,56 @@ public class StuRegister extends AppCompatActivity {
         etemailId=(EditText) findViewById( R.id.editText11 );
         etpwd=(EditText)findViewById( R.id.editText12);
         pgb = (ProgressBar)findViewById( R.id.progressBar2 );
+        sr=getSharedPreferences("srlogin",MODE_PRIVATE);
 
-
-    btnRegister.setOnClickListener( new View.OnClickListener() {
-        @Override
-        public void onClick ( View view ) {
-            String email= etemailId.getText().toString().trim();
-            String password= etpwd.getText().toString().trim();
-
-            if(TextUtils.isEmpty( email )){
-                etemailId.setError("Please enter email ID");
-                etemailId.requestFocus();
-                return;
-            }
-            if(TextUtils.isEmpty( password)){
-                etpwd.setError("Please enter password");
-                etpwd.requestFocus();
-                return;
-            }
-            if (!(email.isEmpty() && password.isEmpty())){
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener( StuRegister.this , new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete ( @NonNull Task<AuthResult> task ) {
-
-                        pgb.setVisibility( View.VISIBLE );
-                        if (task.isSuccessful()) {
-                            finish();
-                            startActivity(new Intent(StuRegister.this, MainActivity.class));
-                        }
-                        else {
-                            pgb.setVisibility( View.INVISIBLE );
-                            try {
-                                throw task.getException();
-                            }
-                            catch (FirebaseAuthInvalidCredentialsException e) {
-                                Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_LONG).show();
-                            }
-                            catch (FirebaseAuthEmailException e){
-                                Toast.makeText(getApplicationContext(), "Invalid Email", Toast.LENGTH_LONG).show();
-                            }
-                            catch (FirebaseAuthException e){
-                                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
-                            }
-                            catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                } );
-            }
-            else{
-                Toast.makeText( StuRegister.this,"Error occurred",Toast.LENGTH_SHORT ).show();
-            }
+        if(sr.getBoolean("srlogged",true)){
+            goToMainActivity();
         }
-    } );
+
+
+        btnRegister.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick ( View view ) {
+                String email= etemailId.getText().toString().trim();
+                String password= etpwd.getText().toString().trim();
+                if(TextUtils.isEmpty( email )){
+                    etemailId.setError("Please enter email ID");
+                    etemailId.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty( password)){
+                    etpwd.setError("Please enter password");
+                    etpwd.requestFocus();
+                    return;
+                }
+                if (!(email.isEmpty() && password.isEmpty())){
+                    mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener( StuRegister.this , new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete ( @NonNull Task<AuthResult> task ) {
+                            pgb.setVisibility( View.VISIBLE );
+                            if(task.isSuccessful()){
+                                pgb.setVisibility( View.INVISIBLE );
+                                sr.edit().putBoolean("srlogged",false).apply();
+                                startActivity( new Intent(getApplicationContext(),MainActivity.class) );
+                                Toast.makeText( StuRegister.this,"registration successful",Toast.LENGTH_SHORT ).show();
+                            }
+                            if(!task.isSuccessful()){
+                                pgb.setVisibility( View.INVISIBLE );
+                                Toast.makeText( StuRegister.this,"registration unsuccessful, please try again",Toast.LENGTH_SHORT ).show();
+                            }
+                        }
+                    } );
+                }
+                else{
+                    Toast.makeText( StuRegister.this,"Error occurred",Toast.LENGTH_SHORT ).show();
+                }
+            }
+        } );
+    }
+
+    public void goToMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+
     }
 }

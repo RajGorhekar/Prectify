@@ -28,6 +28,8 @@ public class QueryType extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
+                finish();
+
             }
         } );
         technical.setOnClickListener( new View.OnClickListener() {
@@ -36,6 +38,8 @@ public class QueryType extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
+                finish();
+
             }
         } );
         hygiene.setOnClickListener( new View.OnClickListener() {
@@ -44,6 +48,8 @@ public class QueryType extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
+                finish();
+
             }
         } );
         food.setOnClickListener( new View.OnClickListener() {
@@ -52,6 +58,8 @@ public class QueryType extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
+                finish();
+
             }
         } );
         others.setOnClickListener( new View.OnClickListener() {
@@ -60,6 +68,8 @@ public class QueryType extends AppCompatActivity {
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
+                finish();
+
             }
         } );
 

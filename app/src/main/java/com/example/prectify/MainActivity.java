@@ -2,6 +2,7 @@ package com.example.prectify;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,11 @@ import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    SharedPreferences sp;
+    SharedPreferences st;
+    SharedPreferences sr;
+
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -28,12 +34,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView( R.layout.activity_main );
         Button btnraise =findViewById( R.id.button6 );
         TextView tve=findViewById( R.id.email122 );
+
+        sp=getSharedPreferences("login",MODE_PRIVATE);
+        st=getSharedPreferences("stlogin",MODE_PRIVATE);
+        sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+
+
+
         btnraise.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
                 Intent intent;
                 intent = new Intent( MainActivity.this , QueryType.class );
                 startActivity(intent);
+                finish();
 
             }
         } );
@@ -96,10 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         else if (id == R.id.action_logout){
-            Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
+            sp.edit().putBoolean("logged",false).apply();
+            st.edit().putBoolean("stlogged",false).apply();
+            sr.edit().putBoolean("srlogged",false).apply();
 
+
+            Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
             Intent intent;
-            intent = new Intent( MainActivity.this , StuLogin.class );
+            intent = new Intent( MainActivity.this , SelectType.class );
             startActivity(intent);
             finish();
         }

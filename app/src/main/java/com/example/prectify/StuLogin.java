@@ -1,6 +1,7 @@
 package com.example.prectify;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,6 +24,7 @@ public class StuLogin extends AppCompatActivity {
     EditText etpwd ;
     private FirebaseAuth mAuth;
     ProgressBar prb;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -35,6 +37,7 @@ public class StuLogin extends AppCompatActivity {
         etpwd=(EditText)findViewById( R.id.editText3);
         prb=(ProgressBar)findViewById( R.id.progressBar3 );
         prb.setVisibility( View.GONE );
+        sp=getSharedPreferences("login",MODE_PRIVATE);
 
         btnreg.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -45,9 +48,12 @@ public class StuLogin extends AppCompatActivity {
                 finish();
             }
         } );
+        if(sp.getBoolean("logged",true)){
+            goToMainActivity();
+        }
 
         btnlogin.setOnClickListener( new View.OnClickListener() {
-           String email= etemailId.getText().toString().trim();
+            String email= etemailId.getText().toString().trim();
             String password= etpwd.getText().toString().trim();
             @Override
             public void onClick ( View view ) {
@@ -70,7 +76,9 @@ public class StuLogin extends AppCompatActivity {
                         public void onComplete ( @NonNull Task<AuthResult> task ) {
                             if (task.isSuccessful()) {
                                 prb.setVisibility( View.INVISIBLE );
+                                sp.edit().putBoolean("logged",true).apply();
                                 startActivity( new Intent( StuLogin.this,MainActivity.class ) );
+                                finish();
                                 Toast.makeText( StuLogin.this,"Login successful",Toast.LENGTH_SHORT ).show();
                             } else {
                                 prb.setVisibility( View.INVISIBLE );
@@ -78,13 +86,16 @@ public class StuLogin extends AppCompatActivity {
                             }
                         }
                     } );
+
                 }
             }
-        } );
-
-
-
-
+        } );}
+    public void goToMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
 
     }
+
+
+
 }
