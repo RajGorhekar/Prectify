@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sp;
     SharedPreferences st;
     SharedPreferences sr;
+    SharedPreferences spr;
+
+
 
 
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sp=getSharedPreferences("login",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+        spr=getSharedPreferences("register",MODE_PRIVATE);
 
 
 
@@ -113,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             sp.edit().putBoolean("logged",false).apply();
             st.edit().putBoolean("stlogged",false).apply();
             sr.edit().putBoolean("srlogged",false).apply();
+            spr.edit().putBoolean("registered",false).apply();
+
+
 
 
             Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();

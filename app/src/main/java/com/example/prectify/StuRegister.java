@@ -36,10 +36,12 @@ public class StuRegister extends AppCompatActivity {
         etpwd=(EditText)findViewById( R.id.editText12);
         pgb = (ProgressBar)findViewById( R.id.progressBar2 );
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
-
         if(sr.getBoolean("srlogged",true)){
             goToMainActivity();
         }
+
+
+
 
 
         btnRegister.setOnClickListener( new View.OnClickListener() {
@@ -64,8 +66,9 @@ public class StuRegister extends AppCompatActivity {
                             pgb.setVisibility( View.VISIBLE );
                             if(task.isSuccessful()){
                                 pgb.setVisibility( View.INVISIBLE );
-                                sr.edit().putBoolean("srlogged",false).apply();
-                                startActivity( new Intent(getApplicationContext(),MainActivity.class) );
+
+                                startActivity( new Intent(getApplicationContext(),StuLogin.class) );
+                                sr.edit().putBoolean("srlogged",true).apply();
                                 Toast.makeText( StuRegister.this,"registration successful",Toast.LENGTH_SHORT ).show();
                             }
                             if(!task.isSuccessful()){
@@ -81,10 +84,11 @@ public class StuRegister extends AppCompatActivity {
             }
         } );
     }
-
     public void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
 
     }
+
+
 }

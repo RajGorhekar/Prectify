@@ -24,7 +24,10 @@ public class StuLogin extends AppCompatActivity {
     EditText etpwd ;
     private FirebaseAuth mAuth;
     ProgressBar prb;
+    SharedPreferences sr;
+    SharedPreferences spr;
     SharedPreferences sp;
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -38,12 +41,19 @@ public class StuLogin extends AppCompatActivity {
         prb=(ProgressBar)findViewById( R.id.progressBar3 );
         prb.setVisibility( View.GONE );
         sp=getSharedPreferences("login",MODE_PRIVATE);
+        spr=getSharedPreferences("register",MODE_PRIVATE);
+        sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+        if(spr.getBoolean("registered",true) && sr.getBoolean("srlogged",true) ){
+            goToMainActivity();
+        }
+
 
         btnreg.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
                 Intent intent;
                 intent = new Intent( StuLogin.this , StuRegister.class );
+                spr.edit().putBoolean("registered",true).apply();
                 startActivity(intent);
                 finish();
             }
