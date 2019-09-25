@@ -13,6 +13,17 @@ public class QueryType extends AppCompatActivity {
     RadioButton hygiene;
     RadioButton food;
     RadioButton others;
+
+
+    @Override
+    public void onBackPressed(){
+        Intent intent;
+        intent = new Intent( QueryType.this , MainActivity.class );
+        startActivity(intent);
+        finish();
+    }
+
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -22,6 +33,7 @@ public class QueryType extends AppCompatActivity {
         hygiene = findViewById( R.id.radioButton3 );
         food = findViewById( R.id.radioButton4 );
         others = findViewById( R.id.radioButton6 );
+
         academics.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
