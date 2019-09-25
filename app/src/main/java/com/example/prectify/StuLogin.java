@@ -77,7 +77,9 @@ public class StuLogin extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 prb.setVisibility( View.INVISIBLE );
                                 sp.edit().putBoolean("logged",true).apply();
-                                startActivity( new Intent( StuLogin.this,MainActivity.class ) );
+                                Intent intent = new Intent( StuLogin.this,MainActivity.class );
+                                intent.putExtra("user_name",etemailId.getText().toString().trim());
+                                startActivity(intent);
                                 finish();
                                 Toast.makeText( StuLogin.this,"Login successful",Toast.LENGTH_SHORT ).show();
                             } else {

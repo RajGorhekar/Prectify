@@ -22,12 +22,12 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/email122"
+        android:id="@+id/TextView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="20dp"
-        android:text="    email:"
+        android:text="   Email : "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp" />
 

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +15,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences sp;
     SharedPreferences st;
     SharedPreferences sr;
+    SharedPreferences spr;
+
+    RecyclerView mRecyclerView;
+    List<UserData> myUserList;
+    UserData mUserData;
 
 
 
@@ -32,25 +40,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
-        Button btnraise =findViewById( R.id.button6 );
-        TextView tve=findViewById( R.id.email122 );
+        final TextView tve=(TextView) findViewById( R.id.TextView8 );
+        mRecyclerView=findViewById( R.id.recyclerview );
+        Intent c =getIntent();
+        String userName = c.getStringExtra("user_name");
+
+
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
+        mRecyclerView.setLayoutManager( gridLayoutManager );
+
+        myUserList = new ArrayList<>(  );
+
+        mUserData = new UserData( "aaaaaa","aaaaaa",R.drawable.kabir1 );
+        myUserList.add( mUserData );
+        mUserData = new UserData( "bbbbb","bbbbbb",R.drawable.second );
+        myUserList.add( mUserData );
+        mUserData = new UserData( "ccccccccccc","cccccccc",R.drawable.mainlogo );
+        myUserList.add( mUserData );
+        mUserData = new UserData( "ddddddddd","dddddddddd",R.drawable.bhau );
+        myUserList.add( mUserData );
+
+        MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
+        mRecyclerView.setAdapter(myAdapter  );
+
 
         sp=getSharedPreferences("login",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
-
-
-
-        btnraise.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick ( View view ) {
-                Intent intent;
-                intent = new Intent( MainActivity.this , QueryType.class );
-                startActivity(intent);
-                finish();
-
-            }
-        } );
+        spr=getSharedPreferences("register",MODE_PRIVATE);
 
         Toolbar toolbar = findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
@@ -77,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setCancelable( false );
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    finish();
+                    finishAndRemoveTask();
                 }
             });
             builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -105,6 +122,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if (id == R.id.action_add) {
+            Intent intent;
+            intent = new Intent( MainActivity.this , QueryType.class );
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
         if (id == R.id.action_settings) {
             Toast.makeText( MainActivity.this , "setting hi toh nahi ho rahi" , Toast.LENGTH_LONG ).show();
             return true;
@@ -113,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             sp.edit().putBoolean("logged",false).apply();
             st.edit().putBoolean("stlogged",false).apply();
             sr.edit().putBoolean("srlogged",false).apply();
+            spr.edit().putBoolean("registered",false).apply();
+
+
 
 
             Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();

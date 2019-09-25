@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SelectType extends AppCompatActivity {
     SharedPreferences st;
+    SharedPreferences sr;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -17,8 +19,10 @@ public class SelectType extends AppCompatActivity {
         setContentView( R.layout.activity_select_type );
         Button btnStudent = findViewById( R.id.button2 );
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
+        sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+        sp=getSharedPreferences("login",MODE_PRIVATE);
 
-        if(st.getBoolean("stlogged",true)){
+        if(st.getBoolean("stlogged",true) && sp.getBoolean("logged",true) || st.getBoolean("stlogged",true) && sr.getBoolean("srlogged",true) ){
             goToMainActivity();
         }
 
