@@ -1,14 +1,18 @@
 package com.example.prectify;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +20,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences st;
     SharedPreferences sr;
     SharedPreferences spr;
+    private DatabaseReference databaseReference;
+    private ValueEventListener eventListener;
+    ProgressDialog progressDialog;
+    SwipeRefreshLayout s;
 
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
@@ -44,24 +59,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView=findViewById( R.id.recyclerview );
         Intent c =getIntent();
         String userName = c.getStringExtra("user_name");
-
-
+       // s= (SwipeRefreshLayout)findViewById(R.id .refresh);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
-        mRecyclerView.setLayoutManager( gridLayoutManager );
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager( llm );
+        progressDialog =new ProgressDialog(this);
+        progressDialog.setMessage("Loading Items....");
 
         myUserList = new ArrayList<>(  );
 
-        mUserData = new UserData( "aaaaaa","aaaaaa",R.drawable.kabir1 );
-        myUserList.add( mUserData );
-        mUserData = new UserData( "bbbbb","bbbbbb",R.drawable.second );
-        myUserList.add( mUserData );
-        mUserData = new UserData( "ccccccccccc","cccccccc",R.drawable.mainlogo );
-        myUserList.add( mUserData );
-        mUserData = new UserData( "ddddddddd","dddddddddd",R.drawable.bhau );
-        myUserList.add( mUserData );
+       /* s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                final MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
+                mRecyclerView.setAdapter(myAdapter  );
+                databaseReference = FirebaseDatabase.getInstance().getReference("Description");
+                progressDialog.show();
+                eventListener=databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        myUserList.clear();
+                        for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
+                            UserData userData=itemsnapshot.getValue(UserData.class);
+                            myUserList.add(userData);
+                        }
+                        myAdapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
 
-        MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        progressDialog.dismiss();
+
+                    }
+                });
+
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+
+                    public void run() {
+
+                    }
+
+                },4000);
+            }
+        });*/
+
+
+
+
+        final MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
         mRecyclerView.setAdapter(myAdapter  );
+        databaseReference = FirebaseDatabase.getInstance().getReference("Description");
+        progressDialog.show();
+        eventListener=databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                myUserList.clear();
+                for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
+                    UserData userData=itemsnapshot.getValue(UserData.class);
+                    myUserList.add(userData);
+                }
+                myAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressDialog.dismiss();
+
+            }
+        });
 
 
         sp=getSharedPreferences("login",MODE_PRIVATE);

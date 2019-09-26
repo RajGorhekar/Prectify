@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 public class DetailActivity extends AppCompatActivity {
     TextView userdescription;
     ImageView userimage;
@@ -21,6 +23,11 @@ public class DetailActivity extends AppCompatActivity {
 
         if(mBundle!=null);
             userdescription.setText( mBundle.getString( "Description" ) );
-            userimage.setImageResource( mBundle.getInt( "Image" ) );
+
+            //userimage.setImageResource( mBundle.getInt( "Image" ) );
+        Glide.with(this)
+                .load(mBundle.getString("Image"))
+                .into(userimage)
+        ;
     }
 }

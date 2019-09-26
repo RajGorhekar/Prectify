@@ -1,12 +1,17 @@
 package com.example.prectify;
 
 public class UserData {
-    private String qTitle;
-    private String qDescription;
-    private int image;
 
-    public UserData ( String qTitle , String qDescription , int image ) {
-        this.qTitle = qTitle;
+    private String qDescription;
+    private String image;
+
+
+
+    public UserData(){
+
+    }
+    public UserData (  String qDescription , String image ) {
+
         this.qDescription = qDescription;
         this.image = image;
     }
@@ -18,15 +23,14 @@ public class UserData {
 
 
 
-    public String getqTitle () {
-        return qTitle;
-    }
+
+
 
     public String getqDescription () {
         return qDescription;
     }
 
-    public int getImage () {
+    public String getImage () {
 
         return image;
     }

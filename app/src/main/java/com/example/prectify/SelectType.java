@@ -37,5 +37,6 @@ public class SelectType extends AppCompatActivity {
     public void goToMainActivity() {
         Intent i = new Intent(this, StuLogin.class);
         startActivity(i);
+        finish();
     }
 }

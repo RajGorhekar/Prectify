@@ -105,6 +105,7 @@ public class StuLogin extends AppCompatActivity {
     public void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        finish();
 
     }
 

@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
@@ -33,8 +35,10 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
 
     @Override
     public void onBindViewHolder ( @NonNull final UserViewHolder userViewHolder , int i ) {
-        userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
-        userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
+        Glide.with(mContext).load(myUserList.get(i).getImage())
+                .into(userViewHolder.imageView);
+       // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
+        //userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
 
         userViewHolder.mCardView.setOnClickListener( new View.OnClickListener() {
@@ -58,16 +62,16 @@ class UserViewHolder extends RecyclerView.ViewHolder {
 
     ImageView imageView;
     TextView mTitle,mDescription;
-    CheckBox mcheckBox;
+    TextView mseen;
     CardView mCardView;
 
     public UserViewHolder ( View itemView ) {
         super( itemView );
 
         imageView= itemView.findViewById( R.id.ivImage );
-        mTitle=itemView.findViewById( R.id.tvTitle );
+        //mTitle=itemView.findViewById( R.id.tvTitle );
         mDescription=itemView.findViewById( R.id.tvDescription );
-        mcheckBox=itemView.findViewById( R.id.cbDone );
+        mseen=itemView.findViewById( R.id.cbDone );
         mCardView=itemView.findViewById( R.id.mycardView );
     }
 }

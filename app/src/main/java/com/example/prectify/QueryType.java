@@ -13,6 +13,7 @@ public class QueryType extends AppCompatActivity {
     RadioButton hygiene;
     RadioButton food;
     RadioButton others;
+    String i;
 
 
     @Override
@@ -37,6 +38,7 @@ public class QueryType extends AppCompatActivity {
         academics.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
+                i="1";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
@@ -47,6 +49,7 @@ public class QueryType extends AppCompatActivity {
         technical.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
+                i="2";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
@@ -57,6 +60,7 @@ public class QueryType extends AppCompatActivity {
         hygiene.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
+                i="3";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
@@ -67,6 +71,7 @@ public class QueryType extends AppCompatActivity {
         food.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
+                i="4";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
@@ -77,6 +82,7 @@ public class QueryType extends AppCompatActivity {
         others.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
+                i="5";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
                 startActivity(intent);
