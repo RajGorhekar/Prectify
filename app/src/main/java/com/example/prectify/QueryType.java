@@ -14,7 +14,7 @@ public class QueryType extends AppCompatActivity {
     RadioButton food;
     RadioButton others;
     String i;
-
+    String querytype;
 
     @Override
     public void onBackPressed(){
@@ -39,8 +39,10 @@ public class QueryType extends AppCompatActivity {
             @Override
             public void onClick ( View view ) {
                 i="1";
+                querytype="Academics";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
+                intent.putExtra("query_type",querytype);
                 startActivity(intent);
                 finish();
 
@@ -50,8 +52,10 @@ public class QueryType extends AppCompatActivity {
             @Override
             public void onClick ( View view ) {
                 i="2";
+                querytype="Technical";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
+                intent.putExtra("query_type",querytype);
                 startActivity(intent);
                 finish();
 
@@ -61,8 +65,10 @@ public class QueryType extends AppCompatActivity {
             @Override
             public void onClick ( View view ) {
                 i="3";
+                querytype="Hygiene";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
+                intent.putExtra("query_type",querytype);
                 startActivity(intent);
                 finish();
 
@@ -72,8 +78,10 @@ public class QueryType extends AppCompatActivity {
             @Override
             public void onClick ( View view ) {
                 i="4";
+                querytype="Food";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
+                intent.putExtra("query_type",querytype);
                 startActivity(intent);
                 finish();
 
@@ -83,8 +91,10 @@ public class QueryType extends AppCompatActivity {
             @Override
             public void onClick ( View view ) {
                 i="5";
+                querytype="Others";
                 Intent intent;
                 intent = new Intent( QueryType.this , RaiseQuery.class );
+                intent.putExtra("query_type",querytype);
                 startActivity(intent);
                 finish();
 

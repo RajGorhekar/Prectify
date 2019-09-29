@@ -35,6 +35,7 @@ public class StuRegister extends AppCompatActivity {
         etemailId=(EditText) findViewById( R.id.editText11 );
         etpwd=(EditText)findViewById( R.id.editText12);
         pgb = (ProgressBar)findViewById( R.id.progressBar2 );
+        pgb.setVisibility( View.INVISIBLE );
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
         if(sr.getBoolean("srlogged",true)){
             goToMainActivity();

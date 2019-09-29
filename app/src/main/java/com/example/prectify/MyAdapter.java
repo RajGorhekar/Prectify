@@ -38,8 +38,9 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
         Glide.with(mContext).load(myUserList.get(i).getImage())
                 .into(userViewHolder.imageView);
        // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
-        //userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
+        userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
+        userViewHolder.mTitle.setText(String.valueOf(myUserList.get(i).getqTitle()));
 
         userViewHolder.mCardView.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -69,7 +70,7 @@ class UserViewHolder extends RecyclerView.ViewHolder {
         super( itemView );
 
         imageView= itemView.findViewById( R.id.ivImage );
-        //mTitle=itemView.findViewById( R.id.tvTitle );
+        mTitle=itemView.findViewById( R.id.tvTitle );
         mDescription=itemView.findViewById( R.id.tvDescription );
         mseen=itemView.findViewById( R.id.cbDone );
         mCardView=itemView.findViewById( R.id.mycardView );

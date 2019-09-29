@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +27,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,8 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences spr;
     private DatabaseReference databaseReference;
     private ValueEventListener eventListener;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog ;
     SwipeRefreshLayout s;
+    TextView tve;
+    NavigationView navigationView;
+    String tag;
+
 
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
@@ -55,11 +64,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
-        final TextView tve=(TextView) findViewById( R.id.TextView8 );
+        tve=(TextView) findViewById( R.id.TextView8 );
         mRecyclerView=findViewById( R.id.recyclerview );
+        navigationView=findViewById(R.id.nav_view);
         Intent c =getIntent();
         String userName = c.getStringExtra("user_name");
-       // s= (SwipeRefreshLayout)findViewById(R.id .refresh);
+        /*tve.setText(String.valueOf(userName));*/
+
+
+
+
+        s= (SwipeRefreshLayout)findViewById(R.id .refresh);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager( llm );
@@ -67,6 +82,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         progressDialog.setMessage("Loading Items....");
 
         myUserList = new ArrayList<>(  );
+
+        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+
+                    public void run() {
+
+                        s.setRefreshing(false);
+                    }
+
+                },3000);
+            }
+        });
 
        /* s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -114,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView.setAdapter(myAdapter  );
         databaseReference = FirebaseDatabase.getInstance().getReference("Description");
         progressDialog.show();
-        eventListener=databaseReference.addValueEventListener(new ValueEventListener() {
+        eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 myUserList.clear();
@@ -231,15 +262,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_share) {
+            Intent sharingintent = new Intent(Intent.ACTION_SEND);
+            sharingintent.setType("text/plain");
+            String sharebody="your body here";
+            String sharesubject="your subject here";
+            sharingintent.putExtra(Intent.EXTRA_TEXT,sharebody);
+            sharingintent.putExtra(Intent.EXTRA_SUBJECT,sharesubject);
+            startActivity(Intent.createChooser(sharingintent,"Share using"));
+
+        }else if (id == R.id.nav_contact) {
             Toast.makeText( MainActivity.this , "BIJLI KA BILL TERA BAAP BHAREGA ??" , Toast.LENGTH_LONG ).show();
 
-        } else if (id == R.id.nav_send) {
+        }
+        else if (id == R.id.nav_send) {
             Toast.makeText( MainActivity.this , "BATA BIJLI KA BILL TERA BAAP BHAREGA KYA ??" , Toast.LENGTH_LONG ).show();
         }
 

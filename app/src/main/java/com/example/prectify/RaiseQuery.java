@@ -1,9 +1,12 @@
 package com.example.prectify;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +30,8 @@ import com.google.firebase.storage.UploadTask;
 import java.text.DateFormat;
 import java.util.Calendar;
 
+import static android.media.MediaRecorder.VideoSource.CAMERA;
+
 public class RaiseQuery extends AppCompatActivity {
     Button btnsubmit;
     Button btnSelectImage;
@@ -34,6 +40,9 @@ public class RaiseQuery extends AppCompatActivity {
     Uri uri;
     String imageUrl;
     ProgressDialog progressDialog;
+    public static final int CAMERA_REQUEST=9999;
+
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -47,15 +56,36 @@ public class RaiseQuery extends AppCompatActivity {
 
     }
     public void btnSelectImage(View view){
-        Intent photopicker=new Intent(Intent.ACTION_PICK);
-        photopicker.setType("image/*");
-        startActivityForResult(photopicker,1);
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("To add Image");
+        String [] pictureDialogItems={"Open Camera","Choose from Device"};
+        pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case 1 :
+                        Intent photopicker=new Intent(Intent.ACTION_PICK);
+                        photopicker.setType("image/*");
+                        startActivityForResult(photopicker,1);;
+                        break;
+                    case 2 :
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, CAMERA_REQUEST);
+                        break;
+                }
+            }
+        });
+        pictureDialog.show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == CAMERA_REQUEST){
+            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+            upload.setImageBitmap(bitmap);
+        }
         if(resultCode == RESULT_OK){
             uri=data.getData();
             upload.setImageURI(uri);
@@ -68,7 +98,7 @@ public class RaiseQuery extends AppCompatActivity {
 
         StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("Upload").child(uri.getLastPathSegment());
         final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Description Uploadind....");
+        progressDialog.setMessage("Description Uploading....");
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -83,7 +113,7 @@ public class RaiseQuery extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(RaiseQuery.this, "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RaiseQuery.this, "Upload Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -97,10 +127,11 @@ public class RaiseQuery extends AppCompatActivity {
         finish();
     }
     public void uploadDes(){
-
+        Intent c =getIntent();
+        String qtype = c.getStringExtra("query_type");
         UserData userData=new UserData(
                 description.getText().toString(),
-                imageUrl
+                imageUrl,qtype
         );
         String myCurrentDateTime = DateFormat.getDateTimeInstance()
                 .format(Calendar.getInstance().getTime());
@@ -121,8 +152,5 @@ public class RaiseQuery extends AppCompatActivity {
                 Toast.makeText(RaiseQuery.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-
-
 }

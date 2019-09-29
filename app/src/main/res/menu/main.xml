@@ -5,7 +5,7 @@
         android:id="@+id/action_add"
         android:orderInCategory="100"
         android:title="Add a Query"
-        android:icon="@drawable/ic_action_add"
+        android:icon="@drawable/aaaaa"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
