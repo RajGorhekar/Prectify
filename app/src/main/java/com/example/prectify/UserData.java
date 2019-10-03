@@ -4,7 +4,7 @@ public class UserData {
 
     private String qDescription;
     private String image;
-    private String  qtitle;
+    private String qTitle;
 
 
 
@@ -12,23 +12,15 @@ public class UserData {
     public UserData(){
 
     }
-    public UserData (  String qDescription , String image , String qtitle) {
+    public UserData (  String qDescription , String image , String qTitle) {
 
         this.qDescription = qDescription;
         this.image = image;
-        this.qtitle=qtitle;
+        this.qTitle=qTitle;
     }
 
-
-
-
-
-
-
-
-
-    public String   getqTitle(){
-        return qtitle;
+    public String getqTitle(){
+        return qTitle;
     }
 
     public String getqDescription () {
@@ -36,7 +28,6 @@ public class UserData {
     }
 
     public String getImage () {
-
         return image;
     }
 }

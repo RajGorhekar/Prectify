@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class StuLogin extends AppCompatActivity {
     SharedPreferences sr;
     SharedPreferences spr;
     SharedPreferences sp;
+
 
 
     @Override
@@ -67,7 +69,7 @@ public class StuLogin extends AppCompatActivity {
             String password= etpwd.getText().toString().trim();
             @Override
             public void onClick ( View view ) {
-                String email = etemailId.getText().toString();
+                final String email = etemailId.getText().toString();
                 String password = etpwd.getText().toString();
                 if(TextUtils.isEmpty( email )){
                     etemailId.setError( "Please enter email ID" );
@@ -75,11 +77,21 @@ public class StuLogin extends AppCompatActivity {
                     return;
                 }
                 if(TextUtils.isEmpty( password )){
-                    etpwd.setError( "Please enter password" );
+                    etpwd.setError( "Please enter Password" );
                     etpwd.requestFocus();
                     return;
                 }
-                if (!(TextUtils.isEmpty( email ) && TextUtils.isEmpty( password ))) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etemailId.setError("Please enter a valid email");
+                    etemailId.requestFocus();
+                    return;
+                }
+                if (password.length() < 6) {
+                    etpwd.setError("Minimum length of password should be 6");
+                    etpwd.requestFocus();
+                    return;
+                }
+                    if (!(TextUtils.isEmpty( email ) && TextUtils.isEmpty( password ))) {
                     prb.setVisibility( View.VISIBLE );
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener( StuLogin.this , new OnCompleteListener<AuthResult>() {
                         @Override
@@ -88,7 +100,10 @@ public class StuLogin extends AppCompatActivity {
                                 prb.setVisibility( View.INVISIBLE );
                                 sp.edit().putBoolean("logged",true).apply();
                                 Intent intent = new Intent( StuLogin.this,MainActivity.class );
-                                intent.putExtra("user_name",etemailId.getText().toString().trim());
+                                /*intent.putExtra("user_name",etemailId.getText().toString().trim());*/
+                                Bundle bundle = new Bundle();
+                                bundle.putString("email",email);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText( StuLogin.this,"Login successful",Toast.LENGTH_SHORT ).show();

@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +33,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView tve;
     NavigationView navigationView;
     String tag;
+    EditText txtsearch;
+    MyAdapter myAdapter;
+    String name;
+
 
 
     RecyclerView mRecyclerView;
@@ -67,14 +76,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tve=(TextView) findViewById( R.id.TextView8 );
         mRecyclerView=findViewById( R.id.recyclerview );
         navigationView=findViewById(R.id.nav_view);
-        Intent c =getIntent();
+        txtsearch=findViewById(R.id.search_bar);
+        FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+        /*if (currentUser!=null){
+            name=currentUser.getDisplayName();
+        }
+        Toast.makeText(this,"" + name, Toast.LENGTH_SHORT).show();*/
+        /*Intent c =getIntent();
         String userName = c.getStringExtra("user_name");
-        /*tve.setText(String.valueOf(userName));*/
+        /*tve.setText(userName);*/
+       /* Bundle bundle= getIntent().getExtras();
+        String username = bundle.getString("email");
+        tve.setText(username.toString());
+*/
 
 
 
-
-        s= (SwipeRefreshLayout)findViewById(R.id .refresh);
+        /*s= (SwipeRefreshLayout)findViewById(R.id .refresh);*/
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager( llm );
@@ -83,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myUserList = new ArrayList<>(  );
 
-        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
@@ -126,22 +144,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-
-                    public void run() {
-
-                    }
-
-                },4000);
-            }
-        });*/
+               */
 
 
 
 
-        final MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
+        myAdapter= new MyAdapter( MainActivity.this,myUserList );
         mRecyclerView.setAdapter(myAdapter  );
         databaseReference = FirebaseDatabase.getInstance().getReference("Description");
         progressDialog.show();
@@ -166,6 +174,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+        txtsearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter (s.toString());
+            }
+        });
+
+
+
+
+
         sp=getSharedPreferences("login",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
@@ -181,6 +210,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener( toggle );
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener( this );
+    }
+
+    private void filter(String text){
+
+        ArrayList<UserData> filterList = new ArrayList<>();
+        for(UserData item : myUserList){
+            if(item.getqTitle().toLowerCase().contains(text)){
+                filterList.add(item);
+            }
+        }
+
+        myAdapter.filteredList(filterList);
     }
 
     @Override
@@ -233,7 +274,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (id == R.id.action_settings) {
-            Toast.makeText( MainActivity.this , "setting hi toh nahi ho rahi" , Toast.LENGTH_LONG ).show();
             return true;
         }
         else if (id == R.id.action_logout){
@@ -277,11 +317,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(Intent.createChooser(sharingintent,"Share using"));
 
         }else if (id == R.id.nav_contact) {
-            Toast.makeText( MainActivity.this , "BIJLI KA BILL TERA BAAP BHAREGA ??" , Toast.LENGTH_LONG ).show();
 
         }
         else if (id == R.id.nav_send) {
-            Toast.makeText( MainActivity.this , "BATA BIJLI KA BILL TERA BAAP BHAREGA KYA ??" , Toast.LENGTH_LONG ).show();
         }
 
         DrawerLayout drawer = findViewById( R.id.drawer_layout );

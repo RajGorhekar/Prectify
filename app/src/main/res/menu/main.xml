@@ -7,6 +7,13 @@
         android:title="Add a Query"
         android:icon="@drawable/aaaaa"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/search_button"
+        android:orderInCategory="100"
+        android:title="Add a Query"
+        android:icon="@drawable/ic_main_search"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

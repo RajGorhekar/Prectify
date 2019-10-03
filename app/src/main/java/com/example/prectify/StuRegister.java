@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class StuRegister extends AppCompatActivity {
     Button btnRegister;
@@ -25,6 +28,8 @@ public class StuRegister extends AppCompatActivity {
     ProgressBar pgb;
     private FirebaseAuth mAuth;
     SharedPreferences sr;
+    FirebaseUser firebaseUser;
+    EditText name;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -36,13 +41,14 @@ public class StuRegister extends AppCompatActivity {
         etpwd=(EditText)findViewById( R.id.editText12);
         pgb = (ProgressBar)findViewById( R.id.progressBar2 );
         pgb.setVisibility( View.INVISIBLE );
+        name=findViewById(R.id.editText);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
         if(sr.getBoolean("srlogged",true)){
             goToMainActivity();
         }
 
 
-
+        final String name1 = name.getText().toString().trim();
 
 
         btnRegister.setOnClickListener( new View.OnClickListener() {
@@ -60,13 +66,35 @@ public class StuRegister extends AppCompatActivity {
                     etpwd.requestFocus();
                     return;
                 }
-                if (!(email.isEmpty() && password.isEmpty())){
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etemailId.setError("Please enter a valid email");
+                    etemailId.requestFocus();
+                    return;
+                }
+                if (password.length() < 6) {
+                    etpwd.setError("Minimum length of password should be 6");
+                    etpwd.requestFocus();
+                    return;
+                }
+                if (!TextUtils.isEmpty( email ) && !TextUtils.isEmpty( password )){
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener( StuRegister.this , new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete ( @NonNull Task<AuthResult> task ) {
                             pgb.setVisibility( View.VISIBLE );
                             if(task.isSuccessful()){
                                 pgb.setVisibility( View.INVISIBLE );
+                                /*firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+                                UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name1).build();
+
+                                firebaseUser.updateProfile(userProfileChangeRequest).addOnCompleteListener(
+                                        new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(StuRegister.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );*/
 
                                 startActivity( new Intent(getApplicationContext(),StuLogin.class) );
                                 sr.edit().putBoolean("srlogged",true).apply();

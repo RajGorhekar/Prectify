@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
@@ -29,7 +30,6 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
     @Override
     public UserViewHolder onCreateViewHolder ( @NonNull ViewGroup viewGroup , int viewType ) {
         View mView = LayoutInflater.from( viewGroup.getContext()).inflate( R.layout.recycler_row_item,viewGroup,false );
-
         return new UserViewHolder(mView);
     }
 
@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
        // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
         userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
-        userViewHolder.mTitle.setText(String.valueOf(myUserList.get(i).getqTitle()));
+        //userViewHolder.mTitle.setText(String.valueOf(myUserList.get(i).getqTitle()));
 
         userViewHolder.mCardView.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -52,11 +52,20 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
             }
         } );
 
+
+
     }
 
     @Override
     public int getItemCount () {
         return myUserList.size();
+    }
+
+    public void filteredList(ArrayList<UserData> filterList) {
+
+        myUserList=filterList;
+        notifyDataSetChanged();
+
     }
 }
 class UserViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +74,8 @@ class UserViewHolder extends RecyclerView.ViewHolder {
     TextView mTitle,mDescription;
     TextView mseen;
     CardView mCardView;
+
+
 
     public UserViewHolder ( View itemView ) {
         super( itemView );

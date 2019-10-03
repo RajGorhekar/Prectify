@@ -48,7 +48,7 @@ public class RaiseQuery extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_raise_query );
         upload=(ImageView)findViewById(R.id.imageView2);
-        btnSelectImage=findViewById( R.id.button3 );
+        btnSelectImage=findViewById( R.id.button6);
         btnsubmit=findViewById( R.id.button3 );
         description=(EditText)findViewById(R.id.editText5);
         progressDialog =new ProgressDialog(this);
@@ -70,6 +70,7 @@ public class RaiseQuery extends AppCompatActivity {
                         break;
                     case 2 :
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        intent.setType("image/*");
                         startActivityForResult(intent, CAMERA_REQUEST);
                         break;
                 }
