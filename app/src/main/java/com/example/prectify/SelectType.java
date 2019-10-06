@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SelectType extends AppCompatActivity {
     SharedPreferences st;
+    Button btnStudent,btnfaculty;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_select_type );
-        Button btnStudent = findViewById( R.id.button2 );
+        btnStudent = findViewById( R.id.button2 );
+        btnfaculty = findViewById(R.id.btn1);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
 
         if(st.getBoolean("stlogged",true)){
@@ -32,6 +34,17 @@ public class SelectType extends AppCompatActivity {
                 finish();
             }
         } );
+
+        btnfaculty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent( SelectType.this , MainActivity.class );
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
     }
     public void goToMainActivity() {

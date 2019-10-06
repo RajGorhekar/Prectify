@@ -53,6 +53,8 @@
                             android:textSize="18sp"
                             android:maxLines="1"
                             android:id="@+id/tvTitle"
+                            android:textStyle="bold"
+
                             />
                         <TextView
                             android:layout_width="match_parent"
@@ -75,6 +77,9 @@
                             android:id="@+id/cbDone"
                             android:layout_width="match_parent"
                             android:layout_height="66dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="btnselectprogress"
                             android:text="@string/status"
                             android:textAlignment="center"
                             android:textColor="#FFD81B60"

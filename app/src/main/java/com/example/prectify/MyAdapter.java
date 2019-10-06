@@ -1,7 +1,10 @@
 package com.example.prectify;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +45,33 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
         userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
         //userViewHolder.mTitle.setText(String.valueOf(myUserList.get(i).getqTitle()));
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            userViewHolder.mseen.setOnContextClickListener(new View.OnContextClickListener() {
+                @Override
+                public boolean onContextClick(View v) {
+                    AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                    pictureDialog.setTitle("Select Progress !");
+                    String [] pictureDialogItems={"Seen","Solved"};
+                    pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case 1 :
+                                    userViewHolder.mseen.setText("Seen");
+                                    break;
+                                case 2 :
+                                    userViewHolder.mseen.setText("Solved");
+                                    break;
+                            }
+                        }
+                    });
+                    pictureDialog.show();
+
+
+                    return true;
+                }
+            });
+        }*/
 
         userViewHolder.mCardView.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -85,5 +116,34 @@ class UserViewHolder extends RecyclerView.ViewHolder {
         mDescription=itemView.findViewById( R.id.tvDescription );
         mseen=itemView.findViewById( R.id.cbDone );
         mCardView=itemView.findViewById( R.id.mycardView );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mseen.setOnContextClickListener(new View.OnContextClickListener() {
+                @Override
+                public boolean onContextClick(View v) {
+                    /*AlertDialog.Builder pictureDialog = new AlertDialog.Builder(MyAdapter.this);
+                    pictureDialog.setTitle("Select Progress !");
+                    String [] pictureDialogItems={"Seen","Solved"};
+                    pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case 1 :
+                                    mseen.setText("Seen");
+                                    break;
+                                case 2 :
+                                    mseen.setText("Solved");
+                                    break;
+                            }
+                        }
+                    });
+                    pictureDialog.show();*/
+                    return true;
+                }
+            });
+        }
+
+
     }
+
+
 }

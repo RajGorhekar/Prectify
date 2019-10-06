@@ -28,6 +28,13 @@ public class DetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(mBundle.getString("Image"))
                 .into(userimage)
+       /*@Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f,
+                    Math.min(mScaleFactor, 10.0f));
+            mImageView.setScaleX(mScaleFactor);
+            mImageView.setScaleY(mScaleFactor);*/
         ;
     }
 }

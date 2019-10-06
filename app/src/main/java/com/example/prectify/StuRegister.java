@@ -20,16 +20,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StuRegister extends AppCompatActivity {
     Button btnRegister;
-    EditText etemailId;
-    EditText etpwd ;
+
     ProgressBar pgb;
     private FirebaseAuth mAuth;
     SharedPreferences sr;
     FirebaseUser firebaseUser;
+    FirebaseAuth firebaseAuth;
     EditText name;
+    String name1;
+    EditText uid;
+    String uid1;
+    EditText etemailId;
+    String email;
+    EditText etpwd ;
+    String password;
+    String token;
+    private DatabaseReference databaseReference;
+
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -40,38 +53,49 @@ public class StuRegister extends AppCompatActivity {
         etemailId=(EditText) findViewById( R.id.editText11 );
         etpwd=(EditText)findViewById( R.id.editText12);
         pgb = (ProgressBar)findViewById( R.id.progressBar2 );
+        uid=findViewById(R.id.editText4);
         pgb.setVisibility( View.INVISIBLE );
         name=findViewById(R.id.editText);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         if(sr.getBoolean("srlogged",true)){
             goToMainActivity();
         }
 
 
-        final String name1 = name.getText().toString().trim();
 
 
         btnRegister.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
-                String email= etemailId.getText().toString().trim();
-                String password= etpwd.getText().toString().trim();
+                email= etemailId.getText().toString().trim();
+                password= etpwd.getText().toString().trim();
+
+                name1 = name.getText().toString().trim();
+                uid1 = uid.getText().toString().trim();
+                pgb.setVisibility( View.VISIBLE );
+
                 if(TextUtils.isEmpty( email )){
+                    pgb.setVisibility( View.INVISIBLE );
                     etemailId.setError("Please enter email ID");
                     etemailId.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty( password)){
+                    pgb.setVisibility( View.INVISIBLE );
                     etpwd.setError("Please enter password");
                     etpwd.requestFocus();
                     return;
                 }
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    pgb.setVisibility( View.INVISIBLE );
                     etemailId.setError("Please enter a valid email");
                     etemailId.requestFocus();
                     return;
                 }
                 if (password.length() < 6) {
+                    pgb.setVisibility( View.INVISIBLE );
                     etpwd.setError("Minimum length of password should be 6");
                     etpwd.requestFocus();
                     return;
@@ -82,7 +106,10 @@ public class StuRegister extends AppCompatActivity {
                         public void onComplete ( @NonNull Task<AuthResult> task ) {
                             pgb.setVisibility( View.VISIBLE );
                             if(task.isSuccessful()){
-                                pgb.setVisibility( View.INVISIBLE );
+                                pgb.setVisibility( View.VISIBLE );
+                                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                token = FirebaseAuth.getInstance().getUid();
+                                writeNewUser(name1 ,email,  uid1 , password , token);
                                 /*firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
                                 UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name1).build();
@@ -108,6 +135,7 @@ public class StuRegister extends AppCompatActivity {
                     } );
                 }
                 else{
+                    pgb.setVisibility( View.INVISIBLE );
                     Toast.makeText( StuRegister.this,"Error occurred",Toast.LENGTH_SHORT ).show();
                 }
             }
@@ -119,6 +147,12 @@ public class StuRegister extends AppCompatActivity {
         finish();
 
     }
+    private void writeNewUser( String name, String email , String uid , String password , String token) {
+        User user = new User(name, email, uid , password);
+
+        databaseReference.child("users").child(token).setValue(user);
+    }
+
 
 
 }

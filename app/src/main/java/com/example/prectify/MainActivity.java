@@ -44,6 +44,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.makeText;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     SharedPreferences sp;
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView=findViewById( R.id.recyclerview );
         navigationView=findViewById(R.id.nav_view);
         txtsearch=findViewById(R.id.search_bar);
-        FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
-        /*if (currentUser!=null){
+        /*FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser!=null){
             name=currentUser.getDisplayName();
         }
         Toast.makeText(this,"" + name, Toast.LENGTH_SHORT).show();*/
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        /*s= (SwipeRefreshLayout)findViewById(R.id .refresh);*/
+        s= (SwipeRefreshLayout)findViewById(R.id .refresh);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager( llm );
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myUserList = new ArrayList<>(  );
 
-        /*s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
@@ -150,9 +152,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         myAdapter= new MyAdapter( MainActivity.this,myUserList );
-        mRecyclerView.setAdapter(myAdapter  );
+        mRecyclerView.setAdapter(myAdapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("Description");
         progressDialog.show();
+
+
+
         eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -187,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void afterTextChanged(Editable s) {
-                filter (s.toString());
+                filter(s.toString());
             }
         });
 
@@ -272,7 +277,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
             return true;
         }
-
+        if (id == R.id.search_button) {
+            if(txtsearch.getVisibility()== View.VISIBLE){
+                txtsearch.setVisibility(View.GONE);
+                txtsearch.setText("");
+            }
+            else if (txtsearch.getVisibility()== View.GONE){
+                txtsearch.setVisibility(View.VISIBLE);
+            }
+            return true;
+        }
         if (id == R.id.action_settings) {
             return true;
         }
@@ -285,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-            Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
+            makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
             Intent intent;
             intent = new Intent( MainActivity.this , SelectType.class );
             startActivity(intent);
@@ -304,7 +318,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_gallery) {
-
+            if(FirebaseAuth.getInstance().getCurrentUser() == null){
+                Raisetoast();
+                AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.show();
+                item.setEnabled(false);
+            }
+            else {
+                Intent intent;
+                intent = new Intent(MainActivity.this, Userprofile.class);
+                startActivity(intent);
+            }
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_share) {
@@ -325,5 +350,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
+    }
+
+    public void Raisetoast(){
+        Toast.makeText( MainActivity.this , "You are logged in as a Faculty" , Toast.LENGTH_LONG).show();
     }
 }
