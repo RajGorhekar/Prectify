@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -40,6 +41,7 @@ public class RaiseQuery extends AppCompatActivity {
     Uri uri;
     String imageUrl;
     ProgressDialog progressDialog;
+    FirebaseAuth mauth;
     public static final int CAMERA_REQUEST=9999;
 
 
@@ -50,6 +52,7 @@ public class RaiseQuery extends AppCompatActivity {
         upload=(ImageView)findViewById(R.id.imageView2);
         btnSelectImage=findViewById( R.id.button6);
         btnsubmit=findViewById( R.id.button3 );
+        mauth= FirebaseAuth.getInstance();
         description=(EditText)findViewById(R.id.editText5);
         progressDialog =new ProgressDialog(this);
         progressDialog.setMessage("Data uploading...");
@@ -132,7 +135,7 @@ public class RaiseQuery extends AppCompatActivity {
         String qtype = c.getStringExtra("query_type");
         UserData userData=new UserData(
                 description.getText().toString(),
-                imageUrl,qtype
+                imageUrl,qtype,mauth.getUid()
         );
         String myCurrentDateTime = DateFormat.getDateTimeInstance()
                 .format(Calendar.getInstance().getTime());

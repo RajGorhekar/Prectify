@@ -39,7 +39,7 @@ public class SelectType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                intent = new Intent( SelectType.this , MainActivity.class );
+                intent = new Intent( SelectType.this , Faclogin.class );
                 startActivity(intent);
                 finish();
             }

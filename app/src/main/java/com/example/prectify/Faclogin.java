@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Faclogin extends AppCompatActivity {
+public class Faclogin extends AppCompatActivity{
     EditText pass;
     Button login;
     @Override

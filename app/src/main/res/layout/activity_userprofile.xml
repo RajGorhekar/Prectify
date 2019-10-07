@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="TextView"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
@@ -35,6 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:text="TextView"
+        android:textSize="24dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -46,6 +49,8 @@
         android:layout_height="42dp"
 
         android:text="TextView"
+        android:textSize="24dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -59,10 +64,22 @@
         android:layout_height="42dp"
         android:layout_marginTop="61dp"
         android:text="TextView"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         app:layout_constraintVertical_bias="0.081" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="278dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:text=" Click to view password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 </androidx.constraintlayout.widget.ConstraintLayout>

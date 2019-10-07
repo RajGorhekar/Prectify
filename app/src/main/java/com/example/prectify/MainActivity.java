@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences spr;
     private DatabaseReference databaseReference;
     private ValueEventListener eventListener;
-    ProgressDialog progressDialog ;
     SwipeRefreshLayout s;
     TextView tve;
     NavigationView navigationView;
@@ -62,14 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText txtsearch;
     MyAdapter myAdapter;
     String name;
-
-
-
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
     UserData mUserData;
-
-
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -98,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager( llm );
-        progressDialog =new ProgressDialog(this);
-        progressDialog.setMessage("Loading Items....");
+
 
         myUserList = new ArrayList<>(  );
 
@@ -147,16 +140,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 });
 
                */
-
-
-
-
         myAdapter= new MyAdapter( MainActivity.this,myUserList );
         mRecyclerView.setAdapter(myAdapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("Description");
-        progressDialog.show();
-
-
 
         eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -167,38 +153,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     myUserList.add(userData);
                 }
                 myAdapter.notifyDataSetChanged();
-                progressDialog.dismiss();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                progressDialog.dismiss();
 
             }
         });
 
-
         txtsearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 filter(s.toString());
             }
         });
-
-
-
-
 
         sp=getSharedPreferences("login",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
@@ -210,15 +185,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
         NavigationView navigationView = findViewById( R.id.nav_view );
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-
                 this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close );
         drawer.addDrawerListener( toggle );
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener( this );
     }
-
     private void filter(String text){
-
         ArrayList<UserData> filterList = new ArrayList<>();
         for(UserData item : myUserList){
             if(item.getqTitle().toLowerCase().contains(text)){
@@ -236,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer( GravityCompat.START );
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
             builder.setTitle("Do you want to Exit ?");
             builder.setMessage("-------------------------------------------------------------------");
             builder.setCancelable( false );
@@ -271,10 +242,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add) {
-            Intent intent;
-            intent = new Intent( MainActivity.this , QueryType.class );
-            startActivity(intent);
-            finish();
+            if(FirebaseAuth.getInstance().getCurrentUser() == null){
+                AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.show();
+                item.setEnabled(false);
+            }
+            else {
+                Intent intent;
+                intent = new Intent(MainActivity.this, QueryType.class);
+                startActivity(intent);
+                finish();
+            }
             return true;
         }
         if (id == R.id.search_button) {
@@ -295,11 +274,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             st.edit().putBoolean("stlogged",false).apply();
             sr.edit().putBoolean("srlogged",false).apply();
             spr.edit().putBoolean("registered",false).apply();
+            FirebaseAuth mauth =FirebaseAuth.getInstance();
+            mauth.signOut();
 
-
-
-
-            makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
+            Toast.makeText( MainActivity.this , "Logged out successfully" , Toast.LENGTH_SHORT ).show();
             Intent intent;
             intent = new Intent( MainActivity.this , SelectType.class );
             startActivity(intent);
@@ -316,10 +294,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
-        } else if (id == R.id.nav_gallery) {
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
-                Raisetoast();
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
                 pictureDialog.show();
@@ -327,10 +302,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else {
                 Intent intent;
-                intent = new Intent(MainActivity.this, Userprofile.class);
+                intent = new Intent(MainActivity.this, Myqueries.class);
                 startActivity(intent);
             }
+
+        } else if (id == R.id.nav_gallery) {
+           if(FirebaseAuth.getInstance().getCurrentUser() == null){
+                AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.show();
+                item.setEnabled(false);
+            }
+            else {
+               Intent intent;
+               intent = new Intent(MainActivity.this, Userprofile.class);
+               startActivity(intent);
+           }
         } else if (id == R.id.nav_slideshow) {
+
 
         } else if (id == R.id.nav_share) {
             Intent sharingintent = new Intent(Intent.ACTION_SEND);
@@ -350,9 +339,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
-    }
-
-    public void Raisetoast(){
-        Toast.makeText( MainActivity.this , "You are logged in as a Faculty" , Toast.LENGTH_LONG).show();
     }
 }

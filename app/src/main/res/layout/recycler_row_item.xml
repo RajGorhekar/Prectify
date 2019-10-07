@@ -27,7 +27,6 @@
 
                     android:layout_weight="4"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bhau"
                     />
 
                 <LinearLayout
@@ -79,7 +78,6 @@
                             android:layout_height="66dp"
                             android:clickable="true"
                             android:focusable="true"
-                            android:onClick="btnselectprogress"
                             android:text="@string/status"
                             android:textAlignment="center"
                             android:textColor="#FFD81B60"

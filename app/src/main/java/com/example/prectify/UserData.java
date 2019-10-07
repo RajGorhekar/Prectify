@@ -5,6 +5,7 @@ public class UserData {
     private String qDescription;
     private String image;
     private String qTitle;
+    private String token;
 
 
 
@@ -12,11 +13,12 @@ public class UserData {
     public UserData(){
 
     }
-    public UserData (  String qDescription , String image , String qTitle) {
+    public UserData (  String qDescription , String image , String qTitle,String token) {
 
         this.qDescription = qDescription;
         this.image = image;
         this.qTitle=qTitle;
+        this.token = token;
     }
 
     public String getqTitle(){
@@ -29,6 +31,10 @@ public class UserData {
 
     public String getImage () {
         return image;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
 

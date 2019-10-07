@@ -20,7 +20,6 @@ public class User {
         this.password=password;
     }
 
-/*
     public String getUsername() {
         return username;
     }
@@ -35,5 +34,21 @@ public class User {
 
     public String getuserPassword() {
         return password;
-    }*/
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setuserEmail(String email) {
+        this.email = email;
+    }
+
+    public void setuserUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setuserPassword(String password) {
+        this.password = password;
+    }
 }

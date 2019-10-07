@@ -28,8 +28,17 @@ public class StuLogin extends AppCompatActivity {
     SharedPreferences sr;
     SharedPreferences spr;
     SharedPreferences sp;
+    SharedPreferences st;
 
-
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+        st.edit().putBoolean("stlogged",false).apply();
+        Intent intent;
+        intent = new Intent( StuLogin.this , SelectType.class );
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -45,6 +54,7 @@ public class StuLogin extends AppCompatActivity {
         sp=getSharedPreferences("login",MODE_PRIVATE);
         spr=getSharedPreferences("register",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+        st=getSharedPreferences("stlogin",MODE_PRIVATE);
         if(spr.getBoolean("registered",true) && sr.getBoolean("srlogged",true) ){
             goToMainActivity();
         }
@@ -63,6 +73,18 @@ public class StuLogin extends AppCompatActivity {
         if(sp.getBoolean("logged",true)){
             goToMainActivity();
         }
+
+        /*@Override
+        public void onBackPressed(){
+            Intent intent;
+            intent = new Intent( StuLogin.this , SelectType.class );
+            startActivity(intent);
+            finish();
+
+
+        }*/
+
+
 
         btnlogin.setOnClickListener( new View.OnClickListener() {
             String email= etemailId.getText().toString().trim();

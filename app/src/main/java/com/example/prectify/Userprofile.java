@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,10 +20,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Userprofile extends AppCompatActivity {
     TextView tvname,tvuid,tvemail,tvpass;
+    Button view;
     private FirebaseDatabase firebaseDatabase;
+    private  FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
     String dname,duid,demail,dpass;
+    String enpass= " ";
+    User User1;
+    static int a = 1;
 
 
 
@@ -31,56 +40,52 @@ public class Userprofile extends AppCompatActivity {
         tvuid=findViewById(R.id.textView9);
         tvemail=findViewById(R.id.textView10);
         tvpass=findViewById(R.id.textView11);
+        view = findViewById(R.id.button8);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final String token = FirebaseAuth.getInstance().getUid();
-       /* User user1= new User();*/
-        /*databaseReference = FirebaseDatabase.getInstance().getReference("users").child(token);
-        databaseReference = databaseReference.child("username");
-        dname =
-        duid = databaseReference.child("uid").toString();
-        demail  = databaseReference.child("email").toString();
-        dpass  = databaseReference.child("password").toString();
-*/
-        /*tvemail.setText(demail);
-        tvname.setText(dname);
-        tvuid.setText(duid);
-        tvpass.setText(dpass);*/
+        databaseReference = FirebaseDatabase.getInstance().getReference("users").child(token);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+           databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dname= (String) dataSnapshot.child("users").child(token).child("username").getValue();
-                duid= (String) dataSnapshot.child("uid").getValue();
-                demail= (String) dataSnapshot.child("email").getValue();
-                dpass= (String) dataSnapshot.child("password").getValue();
-                for(DataSnapshot itemsnapshot:dataSnapshot.child("users").getChildren()){
-                    User user1 = itemsnapshot.getValue(User.class);
-                    if(user1!=null && itemsnapshot.getKey().equals(token)) {
-                        dname = user1.username;
-                        duid = user1.uid;
-                        dpass = user1.password;
-                        demail = user1.email;
-                    }
+
+                User1 = dataSnapshot.getValue(User.class);
+                tvemail.setText("Email : "+ User1.getuserEmail());
+                tvname.setText("Name : " + User1.getUsername());
+                tvuid.setText("Uid : " +  User1.getuserUid());
+
+                for(int i =0 ; i<User1.getuserPassword().length();i++ ){
+                    enpass=enpass+"*";
                 }
+                tvpass.setText("Password  : " +  enpass);
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(a==1){
+                            tvpass.setText("Password : " +  User1.getuserPassword());
+                            view.setText("Click to hide password");
+                            a=0;
+                        }
+                        else if(a==0){
+                            a=1;
+                            tvpass.setText("Password  : " +  enpass);
+                            view.setText("Click to show password");
+                        }
+
+
+                    }
+                });
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(Userprofile.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        tvemail.setText("Email : "+ demail);
-        tvname.setText("Name : " + dname);
-        tvuid.setText("Uid : " +  duid);
-        tvpass.setText("Name : " +  dpass);
-
-
-
-
-
-
     }
 }
