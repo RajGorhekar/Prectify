@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SelectType extends AppCompatActivity {
     SharedPreferences st;
+    SharedPreferences sf;
     Button btnStudent,btnfaculty;
 
     @Override
@@ -19,6 +20,11 @@ public class SelectType extends AppCompatActivity {
         btnStudent = findViewById( R.id.button2 );
         btnfaculty = findViewById(R.id.btn1);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
+        sf=getSharedPreferences("sflogin",MODE_PRIVATE);
+
+        if(sf.getBoolean("sflogged",true)){
+            goToFaclogin();
+        }
 
         if(st.getBoolean("stlogged",true)){
             goToMainActivity();
@@ -27,7 +33,7 @@ public class SelectType extends AppCompatActivity {
         btnStudent.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick ( View view ) {
-                st.edit().putBoolean("stlogged",true).apply();
+               // st.edit().putBoolean("stlogged",true).apply();
                 Intent intent;
                 intent = new Intent( SelectType.this , StuLogin.class );
                 startActivity(intent);
@@ -38,6 +44,7 @@ public class SelectType extends AppCompatActivity {
         btnfaculty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sf.edit().putBoolean("sflogged",true).apply();
                 Intent intent;
                 intent = new Intent( SelectType.this , Faclogin.class );
                 startActivity(intent);
@@ -46,6 +53,11 @@ public class SelectType extends AppCompatActivity {
         });
 
 
+    }
+    public void goToFaclogin(){
+        Intent i=new Intent(this,Faclogin.class);
+        startActivity(i);
+        finish();
     }
     public void goToMainActivity() {
         Intent i = new Intent(this, StuLogin.class);

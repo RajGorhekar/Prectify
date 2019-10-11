@@ -65,7 +65,8 @@ public class StuLogin extends AppCompatActivity {
             public void onClick ( View view ) {
                 Intent intent;
                 intent = new Intent( StuLogin.this , StuRegister.class );
-                spr.edit().putBoolean("registered",true).apply();
+               // spr.edit().putBoolean("registered",true).apply();
+                //st.edit().putBoolean("stlogged",true).apply();
                 startActivity(intent);
                 finish();
             }
@@ -121,6 +122,7 @@ public class StuLogin extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 prb.setVisibility( View.INVISIBLE );
                                 sp.edit().putBoolean("logged",true).apply();
+                                st.edit().putBoolean("stlogged",true).apply();
                                 Intent intent = new Intent( StuLogin.this,MainActivity.class );
                                 /*intent.putExtra("user_name",etemailId.getText().toString().trim());*/
                                 Bundle bundle = new Bundle();

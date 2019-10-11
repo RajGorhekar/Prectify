@@ -52,43 +52,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences st;
     SharedPreferences sr;
     SharedPreferences spr;
-    private DatabaseReference databaseReference;
+    SharedPreferences fl;
+    SharedPreferences sf;
     private ValueEventListener eventListener;
     SwipeRefreshLayout s;
-    TextView tve;
+
     NavigationView navigationView;
     String tag;
+    TextView  hemail;
+    TextView hname;
+    TextView huid;
     EditText txtsearch;
     MyAdapter myAdapter;
     String name;
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
     UserData mUserData;
-
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    FirebaseUser firebaseUser;
+    User User2;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
-        tve=(TextView) findViewById( R.id.TextView8 );
         mRecyclerView=findViewById( R.id.recyclerview );
         navigationView=findViewById(R.id.nav_view);
+        View headerview=navigationView.getHeaderView(0);
+        hemail=headerview.findViewById(R.id.TextView8);
+        hname=headerview.findViewById(R.id.textView);
+        fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
+        sf=getSharedPreferences("sflogin",MODE_PRIVATE);
+
+        huid=headerview.findViewById(R.id.textView13);
         txtsearch=findViewById(R.id.search_bar);
-        /*FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser!=null){
-            name=currentUser.getDisplayName();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseUser != null){
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            final String token = FirebaseAuth.getInstance().getUid();
+            databaseReference = FirebaseDatabase.getInstance().getReference("users").child(token);
+            setHeader();
         }
-        Toast.makeText(this,"" + name, Toast.LENGTH_SHORT).show();*/
-        /*Intent c =getIntent();
-        String userName = c.getStringExtra("user_name");
-        /*tve.setText(userName);*/
-       /* Bundle bundle= getIntent().getExtras();
-        String username = bundle.getString("email");
-        tve.setText(username.toString());
-*/
+        else{
+        setHeader();}
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        
 
 
-
-        s= (SwipeRefreshLayout)findViewById(R.id .refresh);
+        s= (SwipeRefreshLayout)findViewById(R.id.ref2);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager( llm );
@@ -112,34 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-       /* s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                final MyAdapter myAdapter= new MyAdapter( MainActivity.this,myUserList );
-                mRecyclerView.setAdapter(myAdapter  );
-                databaseReference = FirebaseDatabase.getInstance().getReference("Description");
-                progressDialog.show();
-                eventListener=databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        myUserList.clear();
-                        for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
-                            UserData userData=itemsnapshot.getValue(UserData.class);
-                            myUserList.add(userData);
-                        }
-                        myAdapter.notifyDataSetChanged();
-                        progressDialog.dismiss();
 
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        progressDialog.dismiss();
-
-                    }
-                });
-
-               */
         myAdapter= new MyAdapter( MainActivity.this,myUserList );
         mRecyclerView.setAdapter(myAdapter);
         databaseReference = FirebaseDatabase.getInstance().getReference("Description");
@@ -225,6 +212,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             a.show();
         }
     }
+    public void setHeader(){
+        if(firebaseUser == null){
+            hemail.setVisibility(View.GONE);
+            huid.setVisibility(View.GONE);
+            hname.setText("FACULTY");
+        }
+        else {
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User2 = dataSnapshot.getValue(User.class);
+                    hemail.setText("Email : " + User2.getuserEmail());
+                    hname.setText("Name : " + User2.getUsername());
+                    huid.setText("UID :" + User2.getuserUid());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(MainActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu ( Menu menu ) {
@@ -274,6 +286,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             st.edit().putBoolean("stlogged",false).apply();
             sr.edit().putBoolean("srlogged",false).apply();
             spr.edit().putBoolean("registered",false).apply();
+            fl.edit().putBoolean("Faclogged",false).apply();
+            sf.edit().putBoolean("sflogged",false).apply();
             FirebaseAuth mauth =FirebaseAuth.getInstance();
             mauth.signOut();
 
@@ -293,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_home) {
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -307,17 +322,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         } else if (id == R.id.nav_gallery) {
-           if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
                 pictureDialog.show();
                 item.setEnabled(false);
             }
             else {
-               Intent intent;
-               intent = new Intent(MainActivity.this, Userprofile.class);
-               startActivity(intent);
-           }
+                Intent intent;
+                intent = new Intent(MainActivity.this, Userprofile.class);
+                startActivity(intent);
+            }
         } else if (id == R.id.nav_slideshow) {
 
 
@@ -330,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             sharingintent.putExtra(Intent.EXTRA_SUBJECT,sharesubject);
             startActivity(Intent.createChooser(sharingintent,"Share using"));
 
-        }else if (id == R.id.nav_contact) {
+        }else if (id == R.id.navc) {
 
         }
         else if (id == R.id.nav_send) {

@@ -26,7 +26,7 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_contact"
+                android:id="@+id/navc"
                 android:icon="@drawable/ic_menu_contact"
                 android:title="Contact Us" />
             <item

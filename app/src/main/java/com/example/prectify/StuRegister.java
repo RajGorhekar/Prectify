@@ -40,6 +40,8 @@ public class StuRegister extends AppCompatActivity {
     EditText etpwd ;
     String password;
     String token;
+    SharedPreferences spr;
+    SharedPreferences st;
     private DatabaseReference databaseReference;
 
 
@@ -56,6 +58,8 @@ public class StuRegister extends AppCompatActivity {
         uid=findViewById(R.id.editText4);
         pgb.setVisibility( View.INVISIBLE );
         name=findViewById(R.id.editText);
+        spr=getSharedPreferences("register",MODE_PRIVATE);
+        st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -125,6 +129,8 @@ public class StuRegister extends AppCompatActivity {
 
                                 startActivity( new Intent(getApplicationContext(),StuLogin.class) );
                                 sr.edit().putBoolean("srlogged",true).apply();
+                                spr.edit().putBoolean("registered",true).apply();
+                                st.edit().putBoolean("stlogged",true).apply();
                                 Toast.makeText( StuRegister.this,"registration successful",Toast.LENGTH_SHORT ).show();
                             }
                             if(!task.isSuccessful()){

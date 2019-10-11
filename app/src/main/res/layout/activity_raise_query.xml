@@ -128,13 +128,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.842" />
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CAMERA"
-        android:onClick="camera"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="612dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
