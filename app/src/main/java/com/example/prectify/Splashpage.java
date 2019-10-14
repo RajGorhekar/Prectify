@@ -18,7 +18,7 @@ public class Splashpage extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splashpage );
         final ProgressBar prg =findViewById( R.id.progressBar );
-        final Timer t = new Timer();
+        /*final Timer t = new Timer();
         TimerTask tt = new TimerTask() {
             @Override
             public void run()
@@ -31,7 +31,7 @@ public class Splashpage extends AppCompatActivity {
             }
         };
 
-        t.schedule(tt,0,22);
+        t.schedule(tt,0,22);*/
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){
