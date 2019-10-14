@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -96,3 +99,4 @@ public class Myqueries extends AppCompatActivity {
         });
     }
 }
+   // Intent photopicker = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -1,9 +1,13 @@
 package com.example.prectify;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sf;
     private ValueEventListener eventListener;
     SwipeRefreshLayout s;
+    ProgressDialog progressDialog ;
+
 
     NavigationView navigationView;
     String tag;
@@ -73,109 +79,131 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
     User User2;
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
-        mRecyclerView=findViewById( R.id.recyclerview );
-        navigationView=findViewById(R.id.nav_view);
-        View headerview=navigationView.getHeaderView(0);
-        hemail=headerview.findViewById(R.id.TextView8);
-        hname=headerview.findViewById(R.id.textView);
-        fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
-        sf=getSharedPreferences("sflogin",MODE_PRIVATE);
-
-        huid=headerview.findViewById(R.id.textView13);
-        txtsearch=findViewById(R.id.search_bar);
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseUser != null){
-            firebaseAuth = FirebaseAuth.getInstance();
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            final String token = FirebaseAuth.getInstance().getUid();
-            databaseReference = FirebaseDatabase.getInstance().getReference("users").child(token);
-            setHeader();
+        if(!isConnected(MainActivity.this)){
+            Intent intent;
+            intent = new Intent(MainActivity.this, Offline.class);
+            startActivity(intent);
+            finish();
         }
         else{
-        setHeader();}
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        
+            setContentView( R.layout.activity_main );
+            mRecyclerView=findViewById( R.id.recyclerview );
+            navigationView=findViewById(R.id.nav_view);
+            View headerview=navigationView.getHeaderView(0);
+            hemail=headerview.findViewById(R.id.TextView8);
+            hname=headerview.findViewById(R.id.textView);
+            fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
+            sf=getSharedPreferences("sflogin",MODE_PRIVATE);
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading Contents...");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
 
 
-        s= (SwipeRefreshLayout)findViewById(R.id.ref2);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager( llm );
-
-
-        myUserList = new ArrayList<>(  );
-
-        s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-
-                    public void run() {
-
-                        s.setRefreshing(false);
-                    }
-
-                },3000);
+            huid=headerview.findViewById(R.id.textView13);
+            txtsearch=findViewById(R.id.search_bar);
+            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(firebaseUser != null){
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseDatabase = FirebaseDatabase.getInstance();
+                final String token = FirebaseAuth.getInstance().getUid();
+                databaseReference = FirebaseDatabase.getInstance().getReference("users").child(token);
+                setHeader();
             }
-        });
+            else{
+                setHeader();}
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
 
 
-        myAdapter= new MyAdapter( MainActivity.this,myUserList );
-        mRecyclerView.setAdapter(myAdapter);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Description");
 
-        eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                myUserList.clear();
-                for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
-                    UserData userData=itemsnapshot.getValue(UserData.class);
-                    myUserList.add(userData);
+            s= (SwipeRefreshLayout)findViewById(R.id.ref2);
+            GridLayoutManager gridLayoutManager=new GridLayoutManager(MainActivity.this,1);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager( llm );
+
+
+            myUserList = new ArrayList<>(  );
+
+            s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    new Handler().postDelayed(new Runnable() {
+
+                        @Override
+
+                        public void run() {
+
+                            s.setRefreshing(false);
+                        }
+
+                    },3000);
                 }
-                myAdapter.notifyDataSetChanged();
+            });
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            myAdapter= new MyAdapter( MainActivity.this,myUserList );
+            mRecyclerView.setAdapter(myAdapter);
+            databaseReference = FirebaseDatabase.getInstance().getReference("Description");
 
-            }
-        });
+            eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    myUserList.clear();
+                    for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
+                        UserData userData=itemsnapshot.getValue(UserData.class);
+                        myUserList.add(userData);
 
-        txtsearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
 
-        sp=getSharedPreferences("login",MODE_PRIVATE);
-        st=getSharedPreferences("stlogin",MODE_PRIVATE);
-        sr=getSharedPreferences("srlogin",MODE_PRIVATE);
-        spr=getSharedPreferences("register",MODE_PRIVATE);
+                    }
+                    myAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
 
-        Toolbar toolbar = findViewById( R.id.toolbar );
-        setSupportActionBar( toolbar );
-        DrawerLayout drawer = findViewById( R.id.drawer_layout );
-        NavigationView navigationView = findViewById( R.id.nav_view );
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close );
-        drawer.addDrawerListener( toggle );
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener( this );
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    progressDialog.dismiss();
+                }
+            });
+
+            txtsearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+                @Override
+                public void afterTextChanged(Editable s) {
+                    filter(s.toString());
+                }
+            });
+
+            sp=getSharedPreferences("login",MODE_PRIVATE);
+            st=getSharedPreferences("stlogin",MODE_PRIVATE);
+            sr=getSharedPreferences("srlogin",MODE_PRIVATE);
+            spr=getSharedPreferences("register",MODE_PRIVATE);
+
+            Toolbar toolbar = findViewById( R.id.toolbar );
+            setSupportActionBar( toolbar );
+            DrawerLayout drawer = findViewById( R.id.drawer_layout );
+            NavigationView navigationView = findViewById( R.id.nav_view );
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close );
+            drawer.addDrawerListener( toggle );
+            toggle.syncState();
+            navigationView.setNavigationItemSelectedListener( this );
+
+
+
+
+        }
+
     }
     private void filter(String text){
         ArrayList<UserData> filterList = new ArrayList<>();
@@ -212,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             a.show();
         }
     }
+
     public void setHeader(){
         if(firebaseUser == null){
             hemail.setVisibility(View.GONE);
@@ -237,7 +266,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu ( Menu menu ) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -257,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.setMessage("");
                 pictureDialog.show();
                 item.setEnabled(false);
             }
@@ -312,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.setMessage("");
                 pictureDialog.show();
                 item.setEnabled(false);
             }
@@ -325,6 +355,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.setMessage("");
                 pictureDialog.show();
                 item.setEnabled(false);
             }
@@ -346,13 +377,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(Intent.createChooser(sharingintent,"Share using"));
 
         }else if (id == R.id.navc) {
-
+            Intent intent;
+            intent = new Intent(MainActivity.this, Contactus.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_send) {
+            Intent intent;
+            intent = new Intent(MainActivity.this, Aboutus.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById( R.id.drawer_layout );
         drawer.closeDrawer( GravityCompat.START );
         return true;
     }
+
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if (netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+            else return false;
+        } else
+            return false;
+    }
+
 }

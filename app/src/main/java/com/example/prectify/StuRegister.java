@@ -114,18 +114,6 @@ public class StuRegister extends AppCompatActivity {
                                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                                 token = FirebaseAuth.getInstance().getUid();
                                 writeNewUser(name1 ,email,  uid1 , password , token);
-                                /*firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-                                UserProfileChangeRequest userProfileChangeRequest=new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(name1).build();
-
-                                firebaseUser.updateProfile(userProfileChangeRequest).addOnCompleteListener(
-                                        new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(StuRegister.this, "Profile Updated", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                );*/
 
                                 startActivity( new Intent(getApplicationContext(),StuLogin.class) );
                                 sr.edit().putBoolean("srlogged",true).apply();

@@ -16,7 +16,7 @@
         android:layout_marginBottom="3dp"
 
         android:scaleType="fitCenter"
-        android:src="@drawable/second"
+        android:src="@drawable/call"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,62 +62,6 @@
         tools:layout_conversion_absoluteWidth="411dp" />
 
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
 
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="60dp"
-        android:padding="20dp"
-        android:text="Status:"
-        android:textColor="@color/colorPrimary"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/sta"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_conversion_absoluteHeight="66dp"
-        tools:layout_conversion_absoluteWidth="160dp" />
-
-    <TextView
-        android:id="@+id/sta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="188dp"
-        android:layout_marginBottom="60dp"
-        android:padding="20dp"
-        android:text="unseen"
-        android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/txtdescription"
-        tools:layout_conversion_absoluteHeight="66dp"
-        tools:layout_conversion_absoluteWidth="160dp" />
-
-    <androidx.constraintlayout.widget.Group
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_conversion_absoluteHeight="0dp"
-        tools:layout_editor_absoluteY="705dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="0dp" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="207dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="70dp"
-        android:text="Change Status"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sta"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

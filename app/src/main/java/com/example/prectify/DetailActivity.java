@@ -51,8 +51,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView( R.layout.activity_detail );
         userdescription =(TextView)findViewById( R.id.txtdescription );
         userimage=(ImageView)findViewById( R.id.ivImage2 );
-        change=(Button)findViewById(R.id.button9);
-        status=(TextView)findViewById(R.id.sta);
+       /* change=(Button)findViewById(R.id.button9);
+        status=(TextView)findViewById(R.id.sta);*/
 //        FirebaseUser user3= FirebaseAuth.getInstance().getCurrentUser();
 
         Bundle mBundle=getIntent().getExtras();

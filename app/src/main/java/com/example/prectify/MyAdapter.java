@@ -57,9 +57,9 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
        // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
         userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
-
         userViewHolder.status.setText(myUserList.get(i).getStatus());
-        if(userViewHolder.status.equals("Unseen")){
+
+         /*if(userViewHolder.status.equals("Unseen")){
             userViewHolder.status.setTextColor(0xFFD81B60);
         }
         else if(userViewHolder.status.equals("Seen")){
@@ -67,7 +67,7 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
         }
         else if(userViewHolder.status.equals("Solved")){
             userViewHolder.status.setTextColor(0xFF2BC50B);
-        }
+        }*/
 
        if(user3 == null) {
             userViewHolder.status.setOnClickListener(new View.OnClickListener() {
@@ -166,13 +166,12 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
 
     }
 
-
-
     public void changeSeen(String key1){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Description").child(key1);
         reference.child("status").setValue("Seen");
 
     }
+
     public void changeSolved(String key2){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Description").child(key2);
         reference.child("status").setValue("Solved");
@@ -211,6 +210,7 @@ class UserViewHolder extends RecyclerView.ViewHolder {
         mTitle=itemView.findViewById( R.id.tvTitle );
         mDescription=itemView.findViewById( R.id.tvDescription );
         status=itemView.findViewById( R.id.cbDone );
+        setcolor(status);
         mCardView=itemView.findViewById( R.id.mycardView );
 
 
@@ -218,6 +218,18 @@ class UserViewHolder extends RecyclerView.ViewHolder {
 //
 
 
+    }
+
+     void setcolor(TextView t){
+        if(t.getText().equals("Unseen")){
+            t.setTextColor(0xFFD81B60);
+        }
+        else if(t.getText().equals("Seen")){
+            t.setTextColor(0xFF00A6FF);
+        }
+        else if(t.getText().equals("Solved")){
+            t.setTextColor(0xFF2BC50B);
+        }
     }
 
 

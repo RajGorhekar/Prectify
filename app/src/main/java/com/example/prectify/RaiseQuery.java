@@ -1,8 +1,11 @@
 package com.example.prectify;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,10 +32,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DateFormat;
 import java.util.Calendar;
 
 import static android.media.MediaRecorder.VideoSource.CAMERA;
+import static android.media.MediaRecorder.VideoSource.DEFAULT;
 
 public class RaiseQuery extends AppCompatActivity {
     Button btnsubmit;
@@ -63,41 +69,92 @@ public class RaiseQuery extends AppCompatActivity {
     public void btnSelectImage(View view){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle("To add Image");
-        String [] pictureDialogItems={"Open Camera","Choose from Device"};
+        final String [] pictureDialogItems={"Open Camera","Choose from Device"};
         pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case 1 :
-                        Intent photopicker=new Intent(Intent.ACTION_PICK);
-                        photopicker.setType("image/*");
-                        startActivityForResult(photopicker,1);;
-                        break;
-                    case 2 :
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, CAMERA_REQUEST);
-                        break;
+                if(pictureDialogItems[which].equals("Open Camera")) {
+                    Intent photopicker = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(photopicker, 1);
+
+                }
+                else  if(pictureDialogItems[which].equals("Choose from Device")) {
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 2);
+
                 }
             }
         });
         pictureDialog.show();
     }
+   /* private static final int MY_CAMERA_REQUEST_CODE = 100;
+        if ((ContextCompat.checkSelfPermission(AndroidManifest.permission.CAMERA) )!= (PackageManager.PERMISSION_GRANTED)) {
+        requestPermissions(new String[]{Manifest.permission.CAMERA},
+                MY_CAMERA_REQUEST_CODE);
+    }
 
+    @Override
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        }}
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if ((requestCode == 2)){
+                uri = data.getData();
+                upload.setImageURI(uri);
+            }
+            else if ((requestCode == 1)){
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                upload.setImageBitmap(photo);
+                uri = data.getData();
+                //uri = getImageUri(this,photo);
 
-        if(requestCode == CAMERA_REQUEST){
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-            upload.setImageBitmap(bitmap);
+            }
         }
-        if(resultCode == RESULT_OK){
+        /*if(resultCode == 1){
             uri=data.getData();
             upload.setImageURI(uri);
-        }
+        }*/
+        /*switch(requestCode) {
+            case 0:
+                if (resultCode == RESULT_OK) {
+                    uri = data.getData();
+                    upload.setImageURI(uri);
+                }
+                break;
+
+            case 1:
+                if(resultCode == RESULT_OK) {
+                    uri = data.getData();
+                    upload.setImageURI(uri);
+                }break;
+
+            case 2:
+                Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
+
+        }*/
         else{
-            Toast.makeText(this, "You havent picked an image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
         }
     }
     public void uploadimage(){
@@ -134,7 +191,7 @@ public class RaiseQuery extends AppCompatActivity {
     }
 
     public void btnUploadImage(View view) {
-        post ++;
+
         progressDialog.show();
         uploadimage();
         Intent intent;
@@ -151,7 +208,7 @@ public class RaiseQuery extends AppCompatActivity {
         );
         String myCurrentDateTime = DateFormat.getDateTimeInstance()
                 .format(Calendar.getInstance().getTime());
-        FirebaseDatabase.getInstance().getReference("Description").child(String.valueOf(post))
+        FirebaseDatabase.getInstance().getReference("Description")
                 .child(myCurrentDateTime).setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -169,4 +226,12 @@ public class RaiseQuery extends AppCompatActivity {
             }
         });
     }
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        Bitmap OutImage = Bitmap.createScaledBitmap(inImage, 1000, 1000,true);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), OutImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+
 }

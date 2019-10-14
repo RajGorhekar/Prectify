@@ -34,8 +34,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.google.android.gms:play-services-plus:16.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

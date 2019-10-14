@@ -11,7 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Splashpage extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT = 1100;
+    private static int SPLASH_TIME_OUT = 3200;
     int counter;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -24,14 +24,14 @@ public class Splashpage extends AppCompatActivity {
             public void run()
             {
                 counter++;
-                prg.setProgress(counter);
+             //   prg.setProgress(counter);
 
                 if(counter == 100)
                     t.cancel();
             }
         };
 
-        t.schedule(tt,0,11);
+        t.schedule(tt,0,22);
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){

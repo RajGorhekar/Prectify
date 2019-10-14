@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.prectify">
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,20 +13,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Myqueries"></activity>
-        <activity android:name=".Faclogin" />
-        <activity android:name=".Userprofile" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".Offline"></activity>
+        <activity
+            android:name=".Aboutus"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Contactus"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Myqueries" />
+        <activity
+            android:name=".Faclogin"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Userprofile"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:label="Prectify"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RaiseQuery" />
-        <activity android:name=".QueryType" />
-        <activity android:name=".StuRegister" />
-        <activity android:name=".StuLogin" />
-        <activity android:name=".SelectType" />
-        <activity android:name=".Splashpage">
+        <activity
+            android:name=".RaiseQuery"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".QueryType" />
+        <activity
+            android:name=".StuRegister"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".StuLogin"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SelectType"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Splashpage"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

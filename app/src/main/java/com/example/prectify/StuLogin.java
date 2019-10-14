@@ -19,12 +19,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class StuLogin extends AppCompatActivity {
 
     EditText etemailId;
     EditText etpwd ;
     private FirebaseAuth mAuth;
-    ProgressBar prb;
+    GifImageView prb;
     SharedPreferences sr;
     SharedPreferences spr;
     SharedPreferences sp;
@@ -49,7 +51,7 @@ public class StuLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         etemailId=(EditText) findViewById( R.id.editText2 );
         etpwd=(EditText)findViewById( R.id.editText3);
-        prb=(ProgressBar)findViewById( R.id.progressBar3 );
+        prb=findViewById( R.id.progressBar3 );
         prb.setVisibility( View.GONE );
         sp=getSharedPreferences("login",MODE_PRIVATE);
         spr=getSharedPreferences("register",MODE_PRIVATE);
