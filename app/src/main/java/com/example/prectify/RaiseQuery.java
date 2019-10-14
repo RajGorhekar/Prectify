@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -46,11 +47,9 @@ public class RaiseQuery extends AppCompatActivity {
     EditText description;
     Uri uri;
     String imageUrl;
-   // String status="Unseen";
     ProgressDialog progressDialog;
     FirebaseAuth mauth;
-    public static final int CAMERA_REQUEST=9999;
-    static int post=0;
+    String mImageCaptureUri=null;
 
 
     @Override
@@ -75,11 +74,11 @@ public class RaiseQuery extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if(pictureDialogItems[which].equals("Open Camera")) {
                     Intent photopicker = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    photopicker.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
                     startActivityForResult(photopicker, 1);
 
                 }
                 else  if(pictureDialogItems[which].equals("Choose from Device")) {
-//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
                     startActivityForResult(intent, 2);
@@ -89,32 +88,7 @@ public class RaiseQuery extends AppCompatActivity {
         });
         pictureDialog.show();
     }
-   /* private static final int MY_CAMERA_REQUEST_CODE = 100;
-        if ((ContextCompat.checkSelfPermission(AndroidManifest.permission.CAMERA) )!= (PackageManager.PERMISSION_GRANTED)) {
-        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                MY_CAMERA_REQUEST_CODE);
-    }
 
-    @Override
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
-
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-
-            } else {
-
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-
-            }
-
-        }}
-*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,37 +100,17 @@ public class RaiseQuery extends AppCompatActivity {
             else if ((requestCode == 1)){
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
                 upload.setImageBitmap(photo);
-                uri = data.getData();
+                System.out.println(mImageCaptureUri);
                 //uri = getImageUri(this,photo);
 
             }
         }
-        /*if(resultCode == 1){
-            uri=data.getData();
-            upload.setImageURI(uri);
-        }*/
-        /*switch(requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK) {
-                    uri = data.getData();
-                    upload.setImageURI(uri);
-                }
-                break;
 
-            case 1:
-                if(resultCode == RESULT_OK) {
-                    uri = data.getData();
-                    upload.setImageURI(uri);
-                }break;
-
-            case 2:
-                Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
-
-        }*/
         else{
-            Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You haven't picked any image", Toast.LENGTH_SHORT).show();
         }
     }
+
     public void uploadimage(){
 
         StorageReference storageReference= FirebaseStorage.getInstance().getReference().child("Upload").child(uri.getLastPathSegment());
@@ -191,14 +145,14 @@ public class RaiseQuery extends AppCompatActivity {
     }
 
     public void btnUploadImage(View view) {
-
-        progressDialog.show();
         uploadimage();
+        progressDialog.show();
         Intent intent;
         intent = new Intent( RaiseQuery.this , MainActivity.class );
         startActivity(intent);
         finish();
     }
+
     public void uploadDes(){
         Intent c =getIntent();
         String qtype = c.getStringExtra("query_type");
@@ -226,12 +180,10 @@ public class RaiseQuery extends AppCompatActivity {
             }
         });
     }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
+   /* public Uri getImageUri(Context inContext, Bitmap inImage) {
         Bitmap OutImage = Bitmap.createScaledBitmap(inImage, 1000, 1000,true);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), OutImage, "Title", null);
         return Uri.parse(path);
-    }
-
-
+    }*/
 
 }

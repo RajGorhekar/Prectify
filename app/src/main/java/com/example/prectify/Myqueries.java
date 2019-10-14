@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ public class Myqueries extends AppCompatActivity {
     ProgressDialog progressDialog ;
     FirebaseAuth mauth;
     SwipeRefreshLayout s;
-    TextView tve;
+    TextView tve,noq;
     MyAdapter myAdapter;
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
@@ -48,6 +49,8 @@ public class Myqueries extends AppCompatActivity {
         setContentView( R.layout.activity_myqueries);
         tve=(TextView) findViewById( R.id.TextView8 );
         mRecyclerView=findViewById( R.id.recyclerview1);
+        noq= findViewById(R.id.noque);
+        noq.setVisibility(View.GONE);
         mauth = FirebaseAuth.getInstance();
         s= (SwipeRefreshLayout)findViewById(R.id .refresh1);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(Myqueries.this,1);
@@ -82,11 +85,16 @@ public class Myqueries extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 myUserList.clear();
+                int c=0;
                 for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
                     UserData userData=itemsnapshot.getValue(UserData.class);
                     if(userData.getToken().equals(mauth.getUid())){
                         myUserList.add(userData);
+                        c++;
                     }
+                }
+                if(c == 0){
+                    noq.setVisibility(View.VISIBLE);
                 }
                 myAdapter.notifyDataSetChanged();
                 progressDialog.dismiss();

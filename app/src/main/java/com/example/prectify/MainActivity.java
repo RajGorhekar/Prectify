@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setHeader();
             }
             else{
-                setHeader();}
+                setHeader();
+            }
             firebaseAuth = FirebaseAuth.getInstance();
             firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -157,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
                         UserData userData=itemsnapshot.getValue(UserData.class);
                         myUserList.add(userData);
-
 
                     }
                     myAdapter.notifyDataSetChanged();
@@ -252,9 +252,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     User2 = dataSnapshot.getValue(User.class);
-                    hemail.setText("Email : " + User2.getuserEmail());
-                    hname.setText("Name : " + User2.getUsername());
-                    huid.setText("UID :" + User2.getuserUid());
+                    hemail.setVisibility(View.VISIBLE);
+                    huid.setVisibility(View.VISIBLE);
+                    hemail.setText("Email : " + User2.email);
+                    hname.setText("Name : " + User2.getusername());
+                    huid.setText("UID :" + User2.getuid());
                 }
 
                 @Override
@@ -406,5 +408,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else
             return false;
     }
+
+
 
 }

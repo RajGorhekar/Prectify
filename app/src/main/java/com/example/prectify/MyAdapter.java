@@ -33,7 +33,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
    private Context mContext;
    private List<UserData> myUserList;
-   //private String key;
+
 
 
     public MyAdapter ( Context mContext , List<UserData> myUserList ) {
@@ -50,16 +50,22 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
     @Override
     public void onBindViewHolder ( @NonNull final UserViewHolder userViewHolder , int i ) {
 
-        FirebaseUser user3=FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user3 = FirebaseAuth.getInstance().getCurrentUser();
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Description");
         Glide.with(mContext).load(myUserList.get(i).getImage())
                 .into(userViewHolder.imageView);
-       // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
-        userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
-        userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
+        // userViewHolder.imageView.setImageResource( myUserList.get( i ).getImage() );
+        userViewHolder.mTitle.setText(String.valueOf(myUserList.get(i).getqTitle()));
+        userViewHolder.mDescription.setText(String.valueOf(myUserList.get(i).getqDescription()));
         userViewHolder.status.setText(myUserList.get(i).getStatus());
-
-         /*if(userViewHolder.status.equals("Unseen")){
+        if (myUserList.get(i).getStatus().equals("Seen")) {
+            userViewHolder.status.setTextColor(0xFF00A6FF);
+        } else if (myUserList.get(i).getStatus().equals("Solved")) {
+            userViewHolder.status.setTextColor(0xFF2BC50B);
+        } else {
+            userViewHolder.status.setTextColor(0xFFF00000);
+        }
+      /*if(userViewHolder.status.equals("Unseen")){
             userViewHolder.status.setTextColor(0xFFD81B60);
         }
         else if(userViewHolder.status.equals("Seen")){
@@ -69,13 +75,12 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
             userViewHolder.status.setTextColor(0xFF2BC50B);
         }*/
 
-       if(user3 == null) {
+        if (user3 == null) {
             userViewHolder.status.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  final String D= myUserList.get(userViewHolder.getAdapterPosition()).getqDescription();
-                   // Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
-
+                    final String D = myUserList.get(userViewHolder.getAdapterPosition()).getqDescription();
+                     // Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder statusdialog = new AlertDialog.Builder(mContext);
                     statusdialog.setTitle("STATUS");
                     statusdialog.setPositiveButton("Seen", new DialogInterface.OnClickListener() {
@@ -85,10 +90,10 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     //Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
-                                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                        if(snapshot.child("qDescription").getValue(String.class).equals(D)){
-                                            String key=snapshot.getKey();
-//                                            userViewHolder.status.setTextColor(0xFF00A6FF);
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        if (snapshot.child("qDescription").getValue(String.class).equals(D)) {
+                                            String key = snapshot.getKey();
+                                            userViewHolder.status.setTextColor(0xFF00A6FF);
                                             changeSeen(key);
                                         }
                                     }
@@ -106,11 +111,11 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                             databaseReference.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
-                                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                        if(snapshot.child("qDescription").getValue(String.class).equals(D)){
-                                            String key=snapshot.getKey();
-//                                            userViewHolder.status.setTextColor(0xFF2BC50B);
+                                    //Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        if (snapshot.child("qDescription").getValue(String.class).equals(D)) {
+                                            String key = snapshot.getKey();
+                                            userViewHolder.status.setTextColor(0xFF2BC50B);
                                             changeSolved(key);
                                         }
                                     }
@@ -128,48 +133,24 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                     statusdialog.show();
                 }
             });
+
+
         }
-      /* else{
-           userViewHolder.status.setText(myUserList.get(i).getStatus());
 
-
-        }*/
-
-
-       /*     databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    UserData User3 = dataSnapshot.getValue(UserData.class);
-                    userViewHolder.status.setText(String.valueOf(userViewHolder.getAdapterPosition());
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });*/
-
-
-
-
-        userViewHolder.mCardView.setOnClickListener( new View.OnClickListener() {
+        userViewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick ( View v ) {
-                Intent intent =new Intent( mContext,DetailActivity.class );
-                intent.putExtra( "Image",myUserList.get( userViewHolder.getAdapterPosition()).getImage() );
-                intent.putExtra( "Description" ,myUserList.get( userViewHolder.getAdapterPosition()).getqDescription() );
-                mContext.startActivity( intent );
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("Image", myUserList.get(userViewHolder.getAdapterPosition()).getImage());
+                intent.putExtra("Description", myUserList.get(userViewHolder.getAdapterPosition()).getqDescription());
+                mContext.startActivity(intent);
             }
-        } );
-
-
-
+        });
     }
 
     public void changeSeen(String key1){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Description").child(key1);
         reference.child("status").setValue("Seen");
-
     }
 
     public void changeSolved(String key2){
@@ -201,36 +182,13 @@ class UserViewHolder extends RecyclerView.ViewHolder {
     private DatabaseReference databaseReference;
     FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
-
-
     public UserViewHolder ( View itemView ) {
         super( itemView );
-
         imageView= itemView.findViewById( R.id.ivImage );
         mTitle=itemView.findViewById( R.id.tvTitle );
         mDescription=itemView.findViewById( R.id.tvDescription );
         status=itemView.findViewById( R.id.cbDone );
-        setcolor(status);
         mCardView=itemView.findViewById( R.id.mycardView );
-
-
-
-//
-
-
     }
-
-     void setcolor(TextView t){
-        if(t.getText().equals("Unseen")){
-            t.setTextColor(0xFFD81B60);
-        }
-        else if(t.getText().equals("Seen")){
-            t.setTextColor(0xFF00A6FF);
-        }
-        else if(t.getText().equals("Solved")){
-            t.setTextColor(0xFF2BC50B);
-        }
-    }
-
 
 }
