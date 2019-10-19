@@ -28,7 +28,7 @@ public class Userprofile extends AppCompatActivity {
     String dname,duid,demail,dpass;
     String enpass= " ";
     User User1;
-    static int a = 1;
+    int a = 1;
 
 
 
@@ -53,11 +53,11 @@ public class Userprofile extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 User1 = dataSnapshot.getValue(User.class);
-                tvemail.setText("Email : "+ User1.getuserEmail());
-                tvname.setText("Name : " + User1.getUsername());
-                tvuid.setText("Uid : " +  User1.getuserUid());
+                tvemail.setText("Email : "+ User1.getemail());
+                tvname.setText("Name : " + User1.getusername());
+                tvuid.setText("Uid : " +  User1.getuid());
 
-                for(int i =0 ; i<User1.getuserPassword().length();i++ ){
+                for(int i =0 ; i<User1.getpassword().length();i++ ){
                     enpass=enpass+"*";
                 }
                 tvpass.setText("Password  : " +  enpass);
@@ -66,7 +66,7 @@ public class Userprofile extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if(a==1){
-                            tvpass.setText("Password : " +  User1.getuserPassword());
+                            tvpass.setText("Password : " +  User1.getpassword());
                             view.setText("Click to hide password");
                             a=0;
                         }
