@@ -58,16 +58,15 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
         userViewHolder.mTitle.setText( String.valueOf( myUserList.get( i ).getqTitle()) );
         userViewHolder.mDescription.setText( String.valueOf( myUserList.get( i ).getqDescription() ));
         userViewHolder.status.setText(myUserList.get(i).getStatus());
-
-         /*if(userViewHolder.status.equals("Unseen")){
+        if(myUserList.get(i).getStatus().equals("Unseen") ){
             userViewHolder.status.setTextColor(0xFFD81B60);
         }
-        else if(userViewHolder.status.equals("Seen")){
-            userViewHolder.status.setTextColor(0xFF00A6FF);
+        else if(myUserList.get(i).getStatus().equals("Seen")){
+            userViewHolder.status.setTextColor(0xFF00BDEC);
         }
-        else if(userViewHolder.status.equals("Solved")){
-            userViewHolder.status.setTextColor(0xFF2BC50B);
-        }*/
+        else if(myUserList.get(i).getStatus().equals("Solved")){
+            userViewHolder.status.setTextColor(0xFF00C41E);
+        }
 
        if(user3 == null) {
             userViewHolder.status.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +74,6 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                 public void onClick(View view) {
                   final String D= myUserList.get(userViewHolder.getAdapterPosition()).getqDescription();
                    // Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
-
                     AlertDialog.Builder statusdialog = new AlertDialog.Builder(mContext);
                     statusdialog.setTitle("STATUS");
                     statusdialog.setPositiveButton("Seen", new DialogInterface.OnClickListener() {
@@ -86,11 +84,15 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     //Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
                                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                        if(snapshot.child("qDescription").getValue(String.class).equals(D)){
+                                        if((snapshot.child("qDescription").getValue(String.class).equals(D)) && (snapshot.child("trace").getValue(int.class)==0)){
                                             String key=snapshot.getKey();
-//                                            userViewHolder.status.setTextColor(0xFF00A6FF);
                                             changeSeen(key);
+                                            userViewHolder.status.setTextColor(0xFF00A6FF);
                                         }
+                                       /* else{
+                                            Toast.makeText(mContext, "You cant change again contact the developer if you want to", Toast.LENGTH_SHORT).show();
+                                        }*/
+
                                     }
                                 }
 
@@ -106,13 +108,14 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                             databaseReference.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Toast.makeText(mContext, D, Toast.LENGTH_SHORT).show();
                                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                                        if(snapshot.child("qDescription").getValue(String.class).equals(D)){
+                                        if((snapshot.child("qDescription").getValue(String.class).equals(D)) && (snapshot.child("trace").getValue(int.class)== 1)){
                                             String key=snapshot.getKey();
-//                                            userViewHolder.status.setTextColor(0xFF2BC50B);
                                             changeSolved(key);
+                                            userViewHolder.status.setTextColor(0xFF2BC50B);
                                         }
+
+
                                     }
                                 }
 
@@ -128,6 +131,7 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
                     statusdialog.show();
                 }
             });
+
         }
       /* else{
            userViewHolder.status.setText(myUserList.get(i).getStatus());
@@ -168,12 +172,14 @@ public class MyAdapter extends RecyclerView.Adapter<UserViewHolder>{
 
     public void changeSeen(String key1){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Description").child(key1);
+        reference.child("trace").setValue(1);
         reference.child("status").setValue("Seen");
 
     }
 
     public void changeSolved(String key2){
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Description").child(key2);
+        reference.child("trace").setValue(2);
         reference.child("status").setValue("Solved");
     }
 

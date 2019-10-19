@@ -28,8 +28,9 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="266dp"
+        android:layout_marginEnd="133dp"
         android:layout_marginBottom="10dp"
         android:padding="20dp"
         android:text="Description:"
@@ -38,7 +39,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtdescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivImage2"
         tools:layout_conversion_absoluteHeight="66dp"
@@ -48,8 +48,7 @@
         android:id="@+id/txtdescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="278dp"
+        android:layout_marginTop="52dp"
         android:layout_marginBottom="10dp"
         android:padding="20dp"
         android:text="description"
@@ -60,8 +59,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView17"
         tools:layout_conversion_absoluteHeight="66dp"
         tools:layout_conversion_absoluteWidth="411dp" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

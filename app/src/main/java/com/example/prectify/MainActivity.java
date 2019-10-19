@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Do you want to Exit ?");
-            builder.setMessage("-------------------------------------------------------------------");
+            builder.setMessage("");
             builder.setCancelable( false );
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {

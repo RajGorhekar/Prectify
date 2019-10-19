@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -34,6 +34,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.karumi:dexter:5.0.0'
+
     implementation 'com.google.android.gms:play-services-plus:16.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     testImplementation 'junit:junit:4.12'

@@ -7,6 +7,7 @@ public class UserData {
     private String qTitle;
     private String token;
     private String status;
+    private int trace;
    // private int post;
 
 
@@ -18,13 +19,14 @@ public class UserData {
 
 
 
-    public UserData (String qDescription , String image , String qTitle, String token, String status) {
+    public UserData (String qDescription , String image , String qTitle, String token, String status,int trace) {
 
         this.qDescription = qDescription;
         this.image = image;
         this.qTitle=qTitle;
         this.token = token;
         this.status= status;
+        this.trace=trace;
         //this.post=post;
     }
 
@@ -48,7 +50,11 @@ public class UserData {
     public String getStatus() {
         return status;
     }
-   // public int getPost(){     return post; }
+
+    public int getTrace() {
+        return trace;
+    }
+// public int getPost(){     return post; }
 
 
 }
