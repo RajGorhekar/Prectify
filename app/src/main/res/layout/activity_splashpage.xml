@@ -12,7 +12,7 @@
         android:id="@+id/gifImageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="76dp"
         android:src="@drawable/splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView3"
         android:layout_width="185dp"
         android:layout_height="72dp"
         android:layout_marginStart="113dp"
@@ -29,17 +30,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/abc"
+        android:layout_width="0dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="428dp"
+        android:text=""
+        android:textColor="#FF00A6FF"
+        android:textSize="29dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="160dp"
         android:layout_height="99dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="164dp"
         android:foregroundGravity="center"
         android:src="@drawable/preclogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

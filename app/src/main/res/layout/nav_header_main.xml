@@ -29,6 +29,8 @@
         android:paddingBottom="20dp"
         android:scrollbars="vertical"
         android:text="TextViewEmail"
+        android:textColor="#000000"
+
         android:textStyle="bold"
 
 
@@ -40,6 +42,7 @@
         android:paddingBottom="20dp"
         android:paddingTop="2dp"
         android:text="TextViewName"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:textSize="20sp"
          />
@@ -50,6 +53,8 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
         android:paddingTop="2dp"
+        android:textColor="#000000"
+
         android:text="TextViewUID"
         android:textStyle="bold"
         android:textSize="20sp"

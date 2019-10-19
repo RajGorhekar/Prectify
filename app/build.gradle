@@ -41,5 +41,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

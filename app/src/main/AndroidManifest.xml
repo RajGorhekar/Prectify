@@ -51,6 +51,10 @@
             android:name=".SelectType"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".Settings"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name=".Splashpage"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>

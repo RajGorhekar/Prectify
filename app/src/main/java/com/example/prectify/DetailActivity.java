@@ -2,6 +2,7 @@ package com.example.prectify;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +57,7 @@ public class DetailActivity extends AppCompatActivity {
         status=(TextView)findViewById(R.id.sta);*/
 //        FirebaseUser user3= FirebaseAuth.getInstance().getCurrentUser();
 
-        Bundle mBundle=getIntent().getExtras();
+        final Bundle mBundle=getIntent().getExtras();
 
         if(mBundle!=null);
             userdescription.setText( mBundle.getString( "Description" ) );
@@ -119,6 +121,18 @@ public class DetailActivity extends AppCompatActivity {
             }
         });*/
 
+        userimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialog_custom_layout, null);
+                PhotoView photoView = mView.findViewById(R.id.imageView);
+                photoView.setImageBitmap(BitmapFactory.decodeFile(String.valueOf(userimage)));
+                mBuilder.setView(mView);
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
 
+            }
+        });
     }
 }

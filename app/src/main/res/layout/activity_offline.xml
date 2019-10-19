@@ -54,7 +54,7 @@
         android:id="@+id/tryagain"
         android:layout_width="171dp"
         android:layout_height="52dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:background="#76644C"
         android:text="TRY AGAIN"
         android:textColor="#FFFFFF"

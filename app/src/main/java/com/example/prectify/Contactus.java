@@ -7,24 +7,53 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Contactus extends AppCompatActivity {
- ImageView call,mail;
+ ImageView mail;
+ TextView raj,sak,jai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactus);
-        call=findViewById(R.id.imageView3);
         mail =findViewById(R.id.imageView4);
+        raj =findViewById(R.id.raj);
+        jai =findViewById(R.id.jai);
+        sak =findViewById(R.id.sak);
+        raj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:8446417445"));
+                startActivity(intent);
+            }
+        });
+        sak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:8446417445"));
+                startActivity(intent);
+            }
+        });
+        jai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:8446417445"));
+                startActivity(intent);
+            }
+        });
 
-        call.setOnClickListener(new View.OnClickListener() {
+
+       /* call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.putExtra(Intent.EXTRA_PHONE_NUMBER,"8446417445");
                 startActivity(intent);
             }
-        });
+        });*/
 
         mail.setOnClickListener(new View.OnClickListener() {
             @Override

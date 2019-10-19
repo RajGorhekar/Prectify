@@ -310,6 +310,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.action_settings) {
+            if(FirebaseAuth.getInstance().getCurrentUser() == null){
+                AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                pictureDialog.setTitle("You are logged in as a Faculty");
+                pictureDialog.setIcon(R.drawable.change);
+                pictureDialog.setMessage("Touch anywhere to continue");
+                pictureDialog.create() .show();
+                item.setEnabled(false);
+            }
+            else {
+                Intent intent;
+                intent = new Intent(MainActivity.this, Settings.class);
+                startActivity(intent);
+            }
             return true;
         }
         else if (id == R.id.action_logout){
