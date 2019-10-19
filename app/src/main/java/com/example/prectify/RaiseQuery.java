@@ -7,9 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +36,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -46,6 +52,8 @@ public class RaiseQuery extends AppCompatActivity {
     EditText description;
     Uri uri;
     String imageUrl;
+    int trace=0;
+    private static final String IMAGE_DIRECTORY = "/prectify camera";
    // String status="Unseen";
     ProgressDialog progressDialog;
     FirebaseAuth mauth;
@@ -74,8 +82,7 @@ public class RaiseQuery extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(pictureDialogItems[which].equals("Open Camera")) {
-                    Intent photopicker = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(photopicker, 1);
+                    takePhotoFromCamera();
 
                 }
                 else  if(pictureDialogItems[which].equals("Choose from Device")) {
@@ -89,32 +96,7 @@ public class RaiseQuery extends AppCompatActivity {
         });
         pictureDialog.show();
     }
-   /* private static final int MY_CAMERA_REQUEST_CODE = 100;
-        if ((ContextCompat.checkSelfPermission(AndroidManifest.permission.CAMERA) )!= (PackageManager.PERMISSION_GRANTED)) {
-        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                MY_CAMERA_REQUEST_CODE);
-    }
 
-    @Override
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == MY_CAMERA_REQUEST_CODE) {
-
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
-
-            } else {
-
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-
-            }
-
-        }}
-*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,35 +106,15 @@ public class RaiseQuery extends AppCompatActivity {
                 upload.setImageURI(uri);
             }
             else if ((requestCode == 1)){
-                Bitmap photo = (Bitmap) data.getExtras().get("data");
-                upload.setImageBitmap(photo);
-                uri = data.getData();
-                //uri = getImageUri(this,photo);
+                Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+                upload.setImageBitmap(thumbnail);
+                uri=Uri.fromFile(new File(saveImage(thumbnail)));
+                    
+
 
             }
         }
-        /*if(resultCode == 1){
-            uri=data.getData();
-            upload.setImageURI(uri);
-        }*/
-        /*switch(requestCode) {
-            case 0:
-                if (resultCode == RESULT_OK) {
-                    uri = data.getData();
-                    upload.setImageURI(uri);
-                }
-                break;
 
-            case 1:
-                if(resultCode == RESULT_OK) {
-                    uri = data.getData();
-                    upload.setImageURI(uri);
-                }break;
-
-            case 2:
-                Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
-
-        }*/
         else{
             Toast.makeText(this, "You haven't picked an image", Toast.LENGTH_SHORT).show();
         }
@@ -204,7 +166,7 @@ public class RaiseQuery extends AppCompatActivity {
         String qtype = c.getStringExtra("query_type");
         UserData userData=new UserData(
                 description.getText().toString(),
-                imageUrl,qtype,mauth.getUid(),"Unseen"
+                imageUrl,qtype,mauth.getUid(),"Unseen",trace
         );
         String myCurrentDateTime = DateFormat.getDateTimeInstance()
                 .format(Calendar.getInstance().getTime());
@@ -226,10 +188,37 @@ public class RaiseQuery extends AppCompatActivity {
             }
         });
     }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        Bitmap OutImage = Bitmap.createScaledBitmap(inImage, 1000, 1000,true);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), OutImage, "Title", null);
-        return Uri.parse(path);
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+    }
+    public String saveImage(Bitmap myBitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File wallpaperDirectory = new File(
+                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
+        // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs();
+        }
+
+        try {
+            File f = new File(wallpaperDirectory, Calendar.getInstance()
+                    .getTimeInMillis() + ".jpg");
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            MediaScannerConnection.scanFile(this,
+                    new String[]{f.getPath()},
+                    new String[]{"image/jpeg"}, null);
+            fo.close();
+            Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath());
+
+            return f.getAbsolutePath();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return "";
     }
 
 
