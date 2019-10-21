@@ -18,7 +18,7 @@ public class SelectType extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_select_type );
         btnStudent = findViewById( R.id.button2 );
-        btnfaculty = findViewById(R.id.btn1);
+        btnfaculty = findViewById(R.id.button1);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sf=getSharedPreferences("sflogin",MODE_PRIVATE);
 

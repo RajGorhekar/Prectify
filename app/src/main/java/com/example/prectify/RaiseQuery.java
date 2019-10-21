@@ -28,6 +28,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -75,8 +76,12 @@ public class RaiseQuery extends AppCompatActivity {
                         break;
                     case 2 :
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, CAMERA_REQUEST);
+                       /* File file = new  File(getCacheDir(),String.valueOf(System.currentTimeMillis())+ ".jpg");
+                        uri = Uri.fromFile(
+                                file
+                        );
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);*/
+                        startActivityForResult(intent,2);
                         break;
                 }
             }
@@ -88,11 +93,16 @@ public class RaiseQuery extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CAMERA_REQUEST){
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-            upload.setImageBitmap(bitmap);
+       /* if(requestCode == CAMERA_REQUEST){
+           // Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+            //upload.setImageBitmap(bitmap);
+
+        }*/
+        if(resultCode == RESULT_OK && requestCode == 1){
+            uri=data.getData();
+            upload.setImageURI(uri);
         }
-        if(resultCode == RESULT_OK){
+        else if (resultCode == RESULT_OK  && requestCode == 2){
             uri=data.getData();
             upload.setImageURI(uri);
         }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_button">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/mycardView"
@@ -24,7 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/ivImage"
-
+                    android:background="@android:color/white"
                     android:layout_weight="4"
                     android:scaleType="centerCrop"
                     />
@@ -42,27 +43,33 @@
                         android:padding="10dp"
                         android:orientation="vertical"
                         android:layout_weight="1.3"
+                        android:background="@android:color/white"
                         >
 
 
                         <TextView
+                            android:id="@+id/tvTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Title"
-                            android:textSize="18sp"
+                            android:background="@android:color/white"
                             android:maxLines="1"
-                            android:id="@+id/tvTitle"
+                            android:text="Title"
+                            android:textAllCaps="true"
+                            android:textColor="@android:color/holo_purple"
+                            android:textSize="18sp"
                             android:textStyle="bold"
 
                             />
+
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Description"
-                            android:textSize="18sp"
-                            android:maxLines="1"
                             android:id="@+id/tvDescription"
-                            />
+                            android:layout_width="252dp"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:maxLines="1"
+                            android:text="Description"
+                            android:textColor="@android:color/holo_purple"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -79,10 +86,11 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:textAlignment="center"
-                            android:textColor="#FFD81B60"
-                            android:textSize="38sp"
+                            android:textColor="#9C27B0"
+                            android:textSize="28sp"
                             android:textStyle="bold"
-
+                            android:background="@android:color/white"
+                            android:gravity="center"
 
                             />
 

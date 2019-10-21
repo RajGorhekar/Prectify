@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/custom_button"
     android:layout_height="match_parent"
     tools:context=".Userprofile">
 
@@ -21,7 +22,7 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="41dp"
-        android:text="User Profile"
+        android:text="USER PROFILE"
         android:textSize="32dp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -77,9 +78,11 @@
         android:layout_width="278dp"
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/buttons"
         android:text=" Click to view password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

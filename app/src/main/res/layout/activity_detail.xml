@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".DetailActivity"
-    android:id="@+id/linearLayout">
+    android:id="@+id/linearLayout"
+    android:background="@drawable/custom_button">
 
     <ImageView
         android:id="@+id/ivImage2"
@@ -28,55 +29,57 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="266dp"
+        android:layout_marginTop="413dp"
         android:layout_marginBottom="10dp"
         android:padding="20dp"
         android:text="Description:"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtdescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage2"
+        app:layout_constraintTop_toTopOf="@+id/ivImage2"
         tools:layout_conversion_absoluteHeight="66dp"
         tools:layout_conversion_absoluteWidth="411dp" />
+
 
     <TextView
         android:id="@+id/txtdescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="100dp"
         android:padding="20dp"
         android:text="description"
+        android:textColor="@android:color/white"
         android:textSize="19sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17"
         tools:layout_conversion_absoluteHeight="66dp"
         tools:layout_conversion_absoluteWidth="411dp" />
 
-
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
+        android:layout_marginTop="199dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="60dp"
         android:padding="20dp"
-        android:text="Status:"
-        android:textColor="@color/colorPrimary"
+        android:text="   Status:"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
         android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sta"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivImage2"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_conversion_absoluteHeight="66dp"
         tools:layout_conversion_absoluteWidth="160dp" />
 
@@ -87,14 +90,15 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="188dp"
-        android:layout_marginBottom="60dp"
         android:padding="20dp"
-        android:text="unseen"
+        android:text="Unseen"
+        android:textColor="@android:color/white"
         android:textSize="19sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toBottomOf="@+id/txtdescription"
+        app:layout_constraintVertical_bias="0.189"
         tools:layout_conversion_absoluteHeight="66dp"
         tools:layout_conversion_absoluteWidth="160dp" />
 
@@ -108,16 +112,19 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="207dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="70dp"
+        android:background="@drawable/buttonshape"
         android:text="Change Status"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.301"
         app:layout_constraintStart_toEndOf="@+id/sta"
-        app:layout_constraintTop_toBottomOf="@+id/ivImage2" />
+        app:layout_constraintTop_toBottomOf="@+id/ivImage2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

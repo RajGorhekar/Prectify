@@ -53,7 +53,7 @@ public class Myqueries extends AppCompatActivity {
         progressDialog =new ProgressDialog(this);
         progressDialog.setMessage("Loading Items....");
         progressDialog.setCanceledOnTouchOutside(false);
-        getSupportActionBar().setTitle("My Queries");
+//        getSupportActionBar().setTitle("My Queries");
         myUserList = new ArrayList<>(  );
 
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -3,12 +3,15 @@ package com.example.prectify;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+//import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,11 +27,14 @@ public class StuLogin extends AppCompatActivity {
     EditText etemailId;
     EditText etpwd ;
     private FirebaseAuth mAuth;
-    ProgressBar prb;
+   // ProgressBar prb;
     SharedPreferences sr;
     SharedPreferences spr;
     SharedPreferences sp;
     SharedPreferences st;
+    Button login;
+    ImageView dis;
+    TextView togg;
 
     @Override
     public void onBackPressed() {
@@ -49,16 +55,31 @@ public class StuLogin extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         etemailId=(EditText) findViewById( R.id.editText2 );
         etpwd=(EditText)findViewById( R.id.editText3);
-        prb=(ProgressBar)findViewById( R.id.progressBar3 );
-        prb.setVisibility( View.GONE );
+       // prb=(ProgressBar)findViewById( R.id.progressBar3 );
+       // prb.setVisibility( View.GONE );
+        //togg= findViewById(R.id.textView19);
+        //togg.setVisibility(View.GONE);
         sp=getSharedPreferences("login",MODE_PRIVATE);
         spr=getSharedPreferences("register",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
+        login = findViewById(R.id.button4);
         if(spr.getBoolean("registered",true) && sr.getBoolean("srlogged",true) ){
             goToMainActivity();
         }
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                intent = new Intent( StuLogin.this , StuRegister.class );
+                //intent.addFlags(ContactsContract.Intents.FLAG_ACTIVITY_NO_ANIMATION);
+                //startActivityForResult(intent,0);
+                overridePendingTransition(0,0);
+                finish();
+
+            }
+        });
 
         btnreg.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -67,10 +88,12 @@ public class StuLogin extends AppCompatActivity {
                 intent = new Intent( StuLogin.this , StuRegister.class );
                // spr.edit().putBoolean("registered",true).apply();
                 //st.edit().putBoolean("stlogged",true).apply();
+                overridePendingTransition(0,0);
                 startActivity(intent);
                 finish();
             }
         } );
+
         if(sp.getBoolean("logged",true)){
             goToMainActivity();
         }
@@ -115,12 +138,12 @@ public class StuLogin extends AppCompatActivity {
                     return;
                 }
                     if (!(TextUtils.isEmpty( email ) && TextUtils.isEmpty( password ))) {
-                    prb.setVisibility( View.VISIBLE );
+                    //prb.setVisibility( View.VISIBLE );
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener( StuLogin.this , new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete ( @NonNull Task<AuthResult> task ) {
                             if (task.isSuccessful()) {
-                                prb.setVisibility( View.INVISIBLE );
+                               // prb.setVisibility( View.INVISIBLE );
                                 sp.edit().putBoolean("logged",true).apply();
                                 st.edit().putBoolean("stlogged",true).apply();
                                 Intent intent = new Intent( StuLogin.this,MainActivity.class );
@@ -132,7 +155,7 @@ public class StuLogin extends AppCompatActivity {
                                 finish();
                                 Toast.makeText( StuLogin.this,"Login successful",Toast.LENGTH_SHORT ).show();
                             } else {
-                                prb.setVisibility( View.INVISIBLE );
+                               // prb.setVisibility( View.INVISIBLE );
                                 Toast.makeText( StuLogin.this , "login error" , Toast.LENGTH_SHORT ).show();
                             }
                         }

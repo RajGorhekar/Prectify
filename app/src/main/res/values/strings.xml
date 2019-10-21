@@ -108,5 +108,14 @@
     <string name="uid"> UID : </string>
     <string name="status">status </string>
     <string name="title_activity_deleteme">deleteme</string>
+    <string name="login">value</string>
+    <string name="password">value</string>
+    <string name="faculty_id">value</string>
+    <string name="do_not_have_a_login_id">Do not have a login id ?</string>
+    <string name="password1">Password</string>
+    <string name="e_mail">E-mail</string>
+    <string name="button">Button</string>
+    <string name="Do_not_have_a_login_id" />
+    <string name="password2">Password</string>
 
 </resources>

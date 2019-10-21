@@ -3,16 +3,18 @@ package com.example.prectify;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.Button;
+//import android.widget.ImageView;
+//import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class QueryType extends AppCompatActivity {
-    RadioButton academics;
-    RadioButton technical;
-    RadioButton hygiene;
-    RadioButton food;
-    RadioButton others;
+    Button academics;
+    Button technical;
+    Button hygiene;
+    Button food;
+    Button others;
     String i;
     String querytype;
 
@@ -28,7 +30,7 @@ public class QueryType extends AppCompatActivity {
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_query_type );
+        setContentView( R.layout.newquerytype );
         academics = findViewById( R.id.radioButton );
         technical = findViewById( R.id.radioButton2 );
         hygiene = findViewById( R.id.radioButton3 );

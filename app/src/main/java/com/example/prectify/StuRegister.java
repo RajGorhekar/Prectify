@@ -42,6 +42,7 @@ public class StuRegister extends AppCompatActivity {
     String token;
     SharedPreferences spr;
     SharedPreferences st;
+    Button login;
     private DatabaseReference databaseReference;
 
 
@@ -54,10 +55,11 @@ public class StuRegister extends AppCompatActivity {
         btnRegister=(Button)findViewById( R.id.button );
         etemailId=(EditText) findViewById( R.id.editText11 );
         etpwd=(EditText)findViewById( R.id.editText12);
-        pgb = (ProgressBar)findViewById( R.id.progressBar2 );
+//        pgb = (ProgressBar)findViewById( R.id.progressBar2 );
         uid=findViewById(R.id.editText4);
-        pgb.setVisibility( View.INVISIBLE );
+//        pgb.setVisibility( View.INVISIBLE );
         name=findViewById(R.id.editText);
+        login = findViewById(R.id.btnLogin);
         spr=getSharedPreferences("register",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
@@ -67,7 +69,17 @@ public class StuRegister extends AppCompatActivity {
             goToMainActivity();
         }
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                intent = new Intent( StuRegister.this , StuLogin.class );
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
 
+            }
+        });
 
 
         btnRegister.setOnClickListener( new View.OnClickListener() {
@@ -78,22 +90,22 @@ public class StuRegister extends AppCompatActivity {
 
                 name1 = name.getText().toString().trim();
                 uid1 = uid.getText().toString().trim();
-                pgb.setVisibility( View.VISIBLE );
+//                pgb.setVisibility( View.VISIBLE );
 
                 if(TextUtils.isEmpty( email )){
-                    pgb.setVisibility( View.INVISIBLE );
+//                    pgb.setVisibility( View.INVISIBLE );
                     etemailId.setError("Please enter email ID");
                     etemailId.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty( password)){
-                    pgb.setVisibility( View.INVISIBLE );
+//                    pgb.setVisibility( View.INVISIBLE );
                     etpwd.setError("Please enter password");
                     etpwd.requestFocus();
                     return;
                 }
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    pgb.setVisibility( View.INVISIBLE );
+//                    pgb.setVisibility( View.INVISIBLE );
                     etemailId.setError("Please enter a valid email");
                     etemailId.requestFocus();
                     return;

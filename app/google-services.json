@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "617390049775-i3svsq0c39m1o72k6g0c3p8dnmf2lqtf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prectify",
+            "certificate_hash": "8f28b917f02eac3868ff1ff38857f4066aed7e7a"
+          }
+        },
+        {
           "client_id": "617390049775-gm67lip7sgtnch9rd5qmrc5bsfnvhi3s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

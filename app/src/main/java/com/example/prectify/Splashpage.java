@@ -43,4 +43,5 @@ public class Splashpage extends AppCompatActivity {
         },SPLASH_TIME_OUT);
     }
 
+
 }
