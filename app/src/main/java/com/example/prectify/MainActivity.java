@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ProgressDialog progressDialog ;
 
 
+    ImageView pl;
     NavigationView navigationView;
     String tag;
     TextView  hemail;
@@ -96,6 +99,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             View headerview=navigationView.getHeaderView(0);
             hemail=headerview.findViewById(R.id.TextView8);
             hname=headerview.findViewById(R.id.textView);
+            pl=headerview.findViewById(R.id.paymentlogo);
+            pl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    vibe.vibrate(300);
+                }
+            });
             fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
             sf=getSharedPreferences("sflogin",MODE_PRIVATE);
             progressDialog = new ProgressDialog(this);
@@ -170,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     progressDialog.dismiss();
                 }
             });
-
             txtsearch.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
