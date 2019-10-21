@@ -72,8 +72,8 @@ public class Userprofile extends AppCompatActivity {
                         }
                         else if(a==0){
                             a=1;
-                            tvpass.setText("Password  : " +  enpass);
-                            view.setText("Click to show password");
+                            tvpass.setText("Password : " +  enpass);
+                            view.setText("Click to View password");
                         }
 
 

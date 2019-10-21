@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Offline"></activity>
+        <activity
+            android:name=".Offline"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Aboutus"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -41,9 +43,11 @@
             android:name=".RaiseQuery"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".QueryType" />
+            android:name=".QueryType"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".StuRegister"/>
+            android:name=".StuRegister"
+            android:theme="@style/AppTheme.NoActionBar"/>
        <activity
             android:name=".StuLogin"
             android:theme="@style/AppTheme.NoActionBar"/>

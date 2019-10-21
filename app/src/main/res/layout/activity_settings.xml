@@ -4,16 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/custom_button"
     android:orientation="vertical"
-    android:background="#FFFFFF"
     tools:context=".Settings">
 
 
-    <Button
-        android:id="@+id/cem"
+    <EditText
+        android:id="@+id/edtxt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:drawableStart="@drawable/change"
+        android:drawablePadding="19dp"
+        android:hint="ENTER PASSWORD HERE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cpwd" />
+
+    <Button
+        android:id="@+id/change2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:background="@drawable/buttonshape"
+        android:text="change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cem" />
+
+    <Button
+        android:id="@+id/cem"
+        android:layout_width="153dp"
+        android:layout_height="53dp"
         android:layout_marginTop="92dp"
+        android:background="@drawable/buttonshape"
         android:text="Change my EMAIL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,9 +48,10 @@
 
     <Button
         android:id="@+id/cpwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="177dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="232dp"
+        android:background="@drawable/buttonshape"
         android:text="Change my PASSWORD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -32,86 +59,41 @@
         app:layout_constraintTop_toBottomOf="@+id/cem" />
 
     <Button
-        android:id="@+id/change"
+        android:id="@+id/change1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="change"
+        android:background="@drawable/buttonshape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtxt" />
+        app:layout_constraintTop_toBottomOf="@+id/edtxt1" />
 
     <EditText
-        android:id="@+id/edtxt"
+        android:id="@+id/edtxt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="27dp"
         android:drawableStart="@drawable/change"
         android:drawablePadding="19dp"
-        android:hint="ENTER CHANGES HERE"
+        android:hint="ENTER EMAIL HERE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpwd" />
-
-    <Button
-        android:id="@+id/dma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
-        android:text="DELETE MY ACCOUNT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpwd" />
-
-    <Button
-        android:id="@+id/yes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginBottom="136dp"
-        android:text="YES "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dma" />
-
-    <Button
-        android:id="@+id/no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="132dp"
-        android:text="NO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dma" />
+        app:layout_constraintTop_toBottomOf="@+id/cem" />
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/p"
         android:layout_width="246dp"
         android:layout_height="55dp"
         android:layout_marginBottom="60dp"
         android:src="@drawable/pbar"
-        android:id="@+id/p"
+        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text=" Are you sure ? "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dma" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

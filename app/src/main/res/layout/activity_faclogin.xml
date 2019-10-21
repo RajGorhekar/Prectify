@@ -4,42 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/selecttype"
     tools:context=".Faclogin">
+
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="358dp"
-        android:layout_height="46dp"
-        android:text="Enter Your Password"
+        android:layout_width="198dp"
+        android:layout_height="30dp"
+        android:text="Faculty Password"
         android:textAlignment="center"
-        android:textSize="32dp"
+        android:textColor="@android:color/white"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.798"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257" />
-
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="253dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="84dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="your password here"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintVertical_bias="0.363" />
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="Login"
+        android:layout_width="206dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttonshape"
+        android:text="LOGIN"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editText36"
+        android:layout_width="226dp"
+        android:layout_height="59dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:passwordToggleEnabled="true">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.23"
+            android:background="@drawable/textview"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/change"
+            android:drawablePadding="5dp"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="77dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/applogo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView3"
+        android:id="@+id/progressBar"
         android:layout_width="185dp"
         android:layout_height="72dp"
         android:layout_marginStart="113dp"
@@ -37,8 +37,8 @@
         android:layout_width="0dp"
         android:layout_height="39dp"
         android:layout_marginTop="428dp"
-        android:text=""
-        android:textColor="#FF00A6FF"
+        android:text="sna"
+        android:textColor="#4BBDFC"
         android:textSize="29dp"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -52,7 +52,7 @@
         android:layout_height="99dp"
         android:layout_marginTop="164dp"
         android:foregroundGravity="center"
-        android:src="@drawable/preclogo"
+        android:src="@drawable/applogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"

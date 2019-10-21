@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/buttonshape">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/mycardView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_margin="4dp"
+            android:layout_height="320dp"
+            android:layout_margin="1dp"
             app:cardUseCompatPadding="true"
-            app:cardCornerRadius="16dp"
-            >
+            app:cardCornerRadius="18dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -21,13 +25,12 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/ivImage"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/ivImage"
-
-                    android:layout_weight="4"
+                    android:layout_weight="4.3"
                     android:scaleType="centerCrop"
-                    />
+                    android:src="@drawable/noimageavailable" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -39,45 +42,45 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical"
                         android:layout_weight="1.3"
-                        >
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
 
                         <TextView
+                            android:id="@+id/tvTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:text="Title"
                             android:textSize="18sp"
-                            android:maxLines="1"
-                            android:id="@+id/tvTitle"
                             android:textStyle="bold"
 
                             />
+
                         <TextView
+                            android:id="@+id/tvDescription"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Description"
-                            android:textSize="18sp"
                             android:maxLines="1"
-                            android:id="@+id/tvDescription"
-                            />
+                            android:text="Description"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="1sp"
+                        android:layout_width="2sp"
                         android:layout_height="match_parent"
                         android:layout_weight=".7"
                         android:gravity="center">
 
                         <TextView
                             android:id="@+id/cbDone"
-                            android:layout_width="match_parent"
-                            android:layout_height="66dp"
+                            android:layout_width="156dp"
+                            android:layout_height="83dp"
                             android:clickable="true"
                             android:focusable="true"
+                            android:text=""
                             android:textAlignment="center"
                             android:textColor="#FFD81B60"
                             android:textSize="38sp"

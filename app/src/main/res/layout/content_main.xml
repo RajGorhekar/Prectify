@@ -8,7 +8,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_main"
-    android:background="#ccf7ff"
+    android:background="#FFE8D1FF"
     >
 
 

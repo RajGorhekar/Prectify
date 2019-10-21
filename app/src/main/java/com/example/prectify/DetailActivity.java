@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +29,7 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     TextView userdescription;
     ImageView userimage;
+    
     Button change;
     TextView status;
     private FirebaseDatabase firebaseDatabase;
@@ -52,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_detail );
         userdescription =(TextView)findViewById( R.id.txtdescription );
-        userimage=(ImageView)findViewById( R.id.ivImage2 );
+        userimage=findViewById( R.id.ivImage2 );
        /* change=(Button)findViewById(R.id.button9);
         status=(TextView)findViewById(R.id.sta);*/
 //        FirebaseUser user3= FirebaseAuth.getInstance().getCurrentUser();
@@ -121,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });*/
 
-        userimage.setOnClickListener(new View.OnClickListener() {
+        /*userimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailActivity.this);
@@ -133,6 +133,6 @@ public class DetailActivity extends AppCompatActivity {
                 mDialog.show();
 
             }
-        });
+        });*/
     }
 }

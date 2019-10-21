@@ -23,10 +23,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class StuRegister extends AppCompatActivity {
     Button btnRegister;
 
-    ProgressBar pgb;
+    GifImageView pgb;
     private FirebaseAuth mAuth;
     SharedPreferences sr;
     FirebaseUser firebaseUser;
@@ -40,6 +42,7 @@ public class StuRegister extends AppCompatActivity {
     EditText etpwd ;
     String password;
     String token;
+    Button login;
     SharedPreferences spr;
     SharedPreferences st;
     private DatabaseReference databaseReference;
@@ -54,10 +57,11 @@ public class StuRegister extends AppCompatActivity {
         btnRegister=(Button)findViewById( R.id.button );
         etemailId=(EditText) findViewById( R.id.editText11 );
         etpwd=(EditText)findViewById( R.id.editText12);
-        pgb = (ProgressBar)findViewById( R.id.progressBar2 );
+        pgb = findViewById( R.id.progressBar2 );
         uid=findViewById(R.id.editText4);
         pgb.setVisibility( View.INVISIBLE );
         name=findViewById(R.id.editText);
+        login = findViewById(R.id.btnLogin);
         spr=getSharedPreferences("register",MODE_PRIVATE);
         st=getSharedPreferences("stlogin",MODE_PRIVATE);
         sr=getSharedPreferences("srlogin",MODE_PRIVATE);
@@ -68,7 +72,17 @@ public class StuRegister extends AppCompatActivity {
         }
 
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent;
+                intent = new Intent( StuRegister.this , StuLogin.class );
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
 
+            }
+        });
 
         btnRegister.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -116,6 +130,7 @@ public class StuRegister extends AppCompatActivity {
                                 writeNewUser(name1 ,email,  uid1 , password , token);
 
                                 startActivity( new Intent(getApplicationContext(),StuLogin.class) );
+                                finish();
                                 sr.edit().putBoolean("srlogged",true).apply();
                                 spr.edit().putBoolean("registered",true).apply();
                                 st.edit().putBoolean("stlogged",true).apply();

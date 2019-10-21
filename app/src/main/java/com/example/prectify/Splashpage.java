@@ -11,17 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class Splashpage extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 3200;
     int counter;
-    int i;
+    int i=0;
+    GifImageView prg;
     String s = "Snap Share Solve  ";
     TextView tv;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splashpage );
-        final ProgressBar prg =findViewById( R.id.progressBar );
+        prg =findViewById( R.id.progressBar );
         tv =findViewById(R.id.abc);
         /*final Timer t = new Timer();
         TimerTask tt = new TimerTask() {
@@ -55,24 +58,118 @@ public class Splashpage extends AppCompatActivity {
                 }
             },195*(i+1));
         }*/
+
+
+    /*       int time=195*(i+1);
+           new Handler(  ).postDelayed( new Runnable(){
+               @Override
+               public void run(){
+                   while(i<16) {
+                       tv.setText(s.substring(0, i + 1)); i++;
+                   }
+               }
+           },time);
+*/
+    int time = 3000/17;
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("S");
+            }
+        },time);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Sn");
+            }
+        },time*2);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Sna");
+            }
+        },time*3);
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){
                 tv.setText("Snap");
             }
-        },1000);
+        },time*4);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap ");
+            }
+        },time*5);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap S");
+            }
+        },time*6);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Sh");
+            }
+        },time*7);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Sha");
+            }
+        },time*8);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Shar");
+            }
+        },time*9);
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){
                 tv.setText("Snap Share");
             }
-        },2000);
+        },time*10);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Share ");
+            }
+        },time*11);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Share S");
+            }
+        },time*12);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Share So");
+            }
+        },time*13);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Share Sol");
+            }
+        },time*14);
+        new Handler(  ).postDelayed( new Runnable(){
+            @Override
+            public void run(){
+                tv.setText("Snap Share Solv");
+            }
+        },time*15);
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){
                 tv.setText("Snap Share Solve");
             }
-        },3000);
+        },time*16);
+
+
+
         new Handler(  ).postDelayed( new Runnable(){
             @Override
             public void run(){

@@ -2,24 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:background="@drawable/side_nav_bar"
+    android:layout_height="350dp"
+    android:background="@drawable/custom_button"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="15dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="82dp"
+        android:layout_height="87dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="40dp"
+        app:strokeColor="#000000"
+        app:strokeWidth="2dp">
+
+        <ImageView
+            android:id="@+id/paymentlogo"
+            android:layout_width="55dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/applogo" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/TextView8"
@@ -29,36 +39,34 @@
         android:paddingBottom="20dp"
         android:scrollbars="vertical"
         android:text="TextViewEmail"
-        android:textColor="#000000"
-
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
 
 
-/>
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
         android:paddingTop="2dp"
+        android:paddingBottom="20dp"
         android:text="TextViewName"
-        android:textColor="#000000"
-        android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
-         />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
         android:paddingTop="2dp"
-        android:textColor="#000000"
-
+        android:paddingBottom="20dp"
         android:text="TextViewUID"
-        android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
-        />
+        android:textStyle="bold" />
 
 
 </LinearLayout>

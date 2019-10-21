@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">prectify</string>
+    <string name="app_name">Prectify</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -107,6 +107,5 @@
     <string name="tve_email"> Email :</string>
     <string name="uid"> UID : </string>
     <string name="status">status </string>
-    <string name="title_activity_deleteme">deleteme</string>
 
 </resources>

@@ -8,7 +8,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,7 +44,7 @@ public class StuLogin extends AppCompatActivity {
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_stu_login );
+        setContentView( R.layout.activity_stu_login);
         Button btnlogin=findViewById( R.id.button5 );
         Button btnreg =findViewById( R.id.button4 );
         mAuth = FirebaseAuth.getInstance();
@@ -70,6 +69,7 @@ public class StuLogin extends AppCompatActivity {
                // spr.edit().putBoolean("registered",true).apply();
                 //st.edit().putBoolean("stlogged",true).apply();
                 startActivity(intent);
+                overridePendingTransition(0,0);
                 finish();
             }
         } );

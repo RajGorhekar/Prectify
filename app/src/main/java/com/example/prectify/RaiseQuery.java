@@ -73,6 +73,8 @@ public class RaiseQuery extends AppCompatActivity {
         progressDialog =new ProgressDialog(this);
         progressDialog.setMessage("Data uploading...");
 
+
+
     }
     public void btnSelectImage(View view){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -153,15 +155,23 @@ public class RaiseQuery extends AppCompatActivity {
     }
 
     public void btnUploadImage(View view) {
-
+        if(description.getText().toString().equals("")){
+            description.setError("This Field Cannot be Empty");
+        }
+        else if(uri==null){
+            Toast.makeText(RaiseQuery.this, "No Image selected", Toast.LENGTH_SHORT).show();
+        }
+        else{
         progressDialog.show();
         uploadimage();
         Intent intent;
         intent = new Intent( RaiseQuery.this , MainActivity.class );
         startActivity(intent);
         finish();
-    }
+    }}
     public void uploadDes(){
+
+
         Intent c =getIntent();
         String qtype = c.getStringExtra("query_type");
         UserData userData=new UserData(
@@ -212,7 +222,7 @@ public class RaiseQuery extends AppCompatActivity {
                     new String[]{f.getPath()},
                     new String[]{"image/jpeg"}, null);
             fo.close();
-            Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath());
+            //Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath());
 
             return f.getAbsolutePath();
         } catch (IOException e1) {
