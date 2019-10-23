@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -256,6 +257,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hemail.setVisibility(View.GONE);
             huid.setVisibility(View.GONE);
             hname.setText("FACULTY");
+            View headerview=navigationView.getHeaderView(0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            }
+
         }
         else {
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -271,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(MainActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+                    makeText(MainActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -297,8 +302,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
-                pictureDialog.setMessage("");
-                pictureDialog.show();
+                pictureDialog.setIcon(R.drawable.change);
+                pictureDialog.setMessage("Touch anywhere to continue");
+                pictureDialog.create() .show();
                 item.setEnabled(false);
             }
             else {
@@ -366,8 +372,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
-                pictureDialog.setMessage("");
-                pictureDialog.show();
+                pictureDialog.setIcon(R.drawable.change);
+                pictureDialog.setMessage("Touch anywhere to continue");
+                pictureDialog.create() .show();
                 item.setEnabled(false);
             }
             else {
@@ -380,8 +387,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
-                pictureDialog.setMessage("");
-                pictureDialog.show();
+                pictureDialog.setIcon(R.drawable.change);
+                pictureDialog.setMessage("Touch anywhere to continue");
+                pictureDialog.create() .show();
                 item.setEnabled(false);
             }
             else {
