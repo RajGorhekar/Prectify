@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,9 +52,11 @@ public class RaiseQuery extends AppCompatActivity {
     ImageView upload;
     EditText description;
     Uri uri;
+    TextView abc ;
     String imageUrl;
     int trace=0;
-    private static final String IMAGE_DIRECTORY = "/prectify camera";
+    String qtype;
+    private static final String IMAGE_DIRECTORY = "/Prectify camera";
    // String status="Unseen";
     ProgressDialog progressDialog;
     FirebaseAuth mauth;
@@ -69,13 +72,18 @@ public class RaiseQuery extends AppCompatActivity {
         btnSelectImage=findViewById( R.id.button6);
         btnsubmit=findViewById( R.id.button3 );
         mauth= FirebaseAuth.getInstance();
+        abc=findViewById(R.id.type);
         description=(EditText)findViewById(R.id.editText5);
         progressDialog =new ProgressDialog(this);
         progressDialog.setMessage("Data uploading...");
+        Intent c =getIntent();
 
+        qtype = c.getStringExtra("query_type");
+        abc.setText(qtype);
 
 
     }
+
     public void btnSelectImage(View view){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle("To add Image");
@@ -149,7 +157,7 @@ public class RaiseQuery extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i;
-        i=new Intent(RaiseQuery.this,MainActivity.class);
+        i=new Intent(RaiseQuery.this,QueryType.class);
         startActivity(i);
         finish();
     }
@@ -172,8 +180,7 @@ public class RaiseQuery extends AppCompatActivity {
     public void uploadDes(){
 
 
-        Intent c =getIntent();
-        String qtype = c.getStringExtra("query_type");
+
         UserData userData=new UserData(
                 description.getText().toString(),
                 imageUrl,qtype,mauth.getUid(),"Unseen",trace

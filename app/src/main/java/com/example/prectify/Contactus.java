@@ -32,7 +32,7 @@ public class Contactus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:8446417445"));
+                intent.setData(Uri.parse("tel:9930051027"));
                 startActivity(intent);
             }
         });
@@ -40,7 +40,7 @@ public class Contactus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:8446417445"));
+                intent.setData(Uri.parse("tel:8369512553"));
                 startActivity(intent);
             }
         });
@@ -58,10 +58,13 @@ public class Contactus extends AppCompatActivity {
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_EMAIL,"querify69@gmail.com");
-                intent.setType("message/rfc822");
-                startActivity(intent);
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "querify69@gmail.com"});
+                email.putExtra(Intent.EXTRA_SUBJECT,"");
+                email.putExtra(Intent.EXTRA_TEXT, "");
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
     }

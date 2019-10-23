@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_button"
+    android:background="@drawable/selecttype"
     android:orientation="vertical"
     tools:context=".Settings">
 
@@ -13,87 +13,89 @@
         android:id="@+id/edtxt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/change"
         android:drawablePadding="19dp"
         android:hint="ENTER PASSWORD HERE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cpwd" />
 
     <Button
         android:id="@+id/change2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="92dp"
         android:background="@drawable/buttonshape"
         android:text="change"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cem" />
+        app:layout_constraintTop_toBottomOf="@+id/edtxt2" />
 
     <Button
         android:id="@+id/cem"
         android:layout_width="153dp"
         android:layout_height="53dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="56dp"
         android:background="@drawable/buttonshape"
         android:text="Change my EMAIL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/cpwd"
         android:layout_width="177dp"
         android:layout_height="52dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="44dp"
         android:background="@drawable/buttonshape"
         android:text="Change my PASSWORD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cem" />
 
     <Button
         android:id="@+id/change1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="change"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="92dp"
         android:background="@drawable/buttonshape"
+        android:text="change"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtxt1" />
 
     <EditText
         android:id="@+id/edtxt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="29dp"
         android:drawableStart="@drawable/change"
         android:drawablePadding="19dp"
         android:hint="ENTER EMAIL HERE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cem" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/p"
-        android:layout_width="246dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="60dp"
+        android:layout_width="222dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/pbar"
-        android:background="@drawable/buttonshape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="76dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/applogo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

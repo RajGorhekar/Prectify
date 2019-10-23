@@ -29,7 +29,7 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity {
     TextView userdescription;
     ImageView userimage;
-    
+
     Button change;
     TextView status;
     private FirebaseDatabase firebaseDatabase;
@@ -62,77 +62,9 @@ public class DetailActivity extends AppCompatActivity {
         if(mBundle!=null);
             userdescription.setText( mBundle.getString( "Description" ) );
 
-            //userimage.setImageResource( mBundle.getInt( "Image" ) );
         Glide.with(this)
                 .load(mBundle.getString("Image"))
                 .into(userimage);
-      /*  if(user3 != null){
-           change.setVisibility(View.GONE);
 
-        }
-        else{
-            change.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
-                    pictureDialog.setTitle("STATUS");
-                    String [] pictureDialogItems={"SEEN","SOLVED"};
-                    pictureDialog.setItems(pictureDialogItems, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which){
-                                case 1 :
-
-                                    break;
-                                case 2 :
-
-                                    break;
-                            }
-                }
-            });
-                    pictureDialog.show();
-        }*/
-
-//        myAdapter= new MyAdapter( DetailActivity.this,myUserList );
-//        mRecyclerView.setAdapter(myAdapter);
-//        databaseReference = FirebaseDatabase.getInstance().getReference("Description");
-//        databaseReference1 = FirebaseDatabase.getInstance().getReference("Description").child("status");
-
-       /* eventListener =databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                myUserList.clear();
-                for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
-                    UserData userData=itemsnapshot.getValue(UserData.class);
-                        if(userData.getqDescription().equals(userdescription.getText().toString())){
-                            itemsnapshot.getRef().child("status").setValue("See")
-
-
-.
-                        }
-                }
-                myAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-        /*userimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.dialog_custom_layout, null);
-                PhotoView photoView = mView.findViewById(R.id.imageView);
-                photoView.setImageBitmap(BitmapFactory.decodeFile(String.valueOf(userimage)));
-                mBuilder.setView(mView);
-                AlertDialog mDialog = mBuilder.create();
-                mDialog.show();
-
-            }
-        });*/
     }
 }

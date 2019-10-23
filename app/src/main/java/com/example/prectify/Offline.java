@@ -1,6 +1,5 @@
 package com.example.prectify;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,16 +9,16 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
 public class Offline extends AppCompatActivity {
     Button tryagain;
+    int i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offline);
+        setContentView(R.layout.offline1);
         tryagain =findViewById(R.id.tryagain);
 
         tryagain.setOnClickListener(new View.OnClickListener() {
@@ -32,8 +31,15 @@ public class Offline extends AppCompatActivity {
                     finish();
                 }
                 else{
+/*
+                    if(i==1){
+                        setContentView(R.layout.offline1);
+                       i=0;
+                    }else{
+                        setContentView(R.layout.activity_offline);
+                        i=1;
+                    }*/
                     buildDialog(Offline.this).show();
-
                 }
             }
         });
@@ -60,7 +66,7 @@ public class Offline extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setTitle("No Internet Connection");
-        builder.setMessage("You need to have Mobile Data or wifi to access this.Restart the Application by doing so.\n           Press ok to Exit");
+        builder.setMessage("You need to have Mobile Data or wifi to access this.Restart the Application by doing so.\n\nPress ok to Exit");
         builder.setCancelable(true);
 
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

@@ -86,7 +86,6 @@ public class Settings extends AppCompatActivity {
         change2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                change2.setVisibility(View.GONE);
                 p.setVisibility(View.VISIBLE);
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String newPassword = aa.getText().toString();

@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,6 +61,9 @@ public class Myqueries extends AppCompatActivity {
         progressDialog.setMessage("Loading Items....");
         progressDialog.setCanceledOnTouchOutside(false);
         getSupportActionBar().setTitle("My Queries");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         myUserList = new ArrayList<>(  );
 
         s.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -105,6 +109,16 @@ public class Myqueries extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
    // Intent photopicker = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
