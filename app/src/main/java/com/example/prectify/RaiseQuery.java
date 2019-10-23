@@ -176,7 +176,8 @@ public class RaiseQuery extends AppCompatActivity {
         intent = new Intent( RaiseQuery.this , MainActivity.class );
         startActivity(intent);
         finish();
-    }}
+        Toast.makeText(RaiseQuery.this, "Upload succesfull \n Displaying your Query may take some Time", Toast.LENGTH_LONG).show();
+        }}
     public void uploadDes(){
 
 
