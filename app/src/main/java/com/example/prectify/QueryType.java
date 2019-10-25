@@ -30,7 +30,7 @@ public class QueryType extends AppCompatActivity {
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_query_type);
+        setContentView( R.layout.qt);
         academics = findViewById( R.id.radioButton );
         technical = findViewById( R.id.radioButton2 );
         hygiene = findViewById( R.id.radioButton3 );

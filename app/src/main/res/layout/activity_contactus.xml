@@ -4,131 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/aboutus"
+    android:background="@drawable/selecttype"
 
     tools:context=".Contactus">
 
 
     <TextView
         android:id="@+id/raj"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginEnd="52dp"
+        android:contextClickable="true"
         android:gravity="center"
         android:text="8446417445 "
-        android:contextClickable="true"
         android:textAlignment="center"
         android:textColor="#FF00FFE8"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/rajn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.189" />
 
-
     <TextView
         android:id="@+id/sak"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
         android:contextClickable="true"
         android:gravity="center"
         android:text="9930051027 "
         android:textAlignment="center"
         android:textColor="#FF00FFE8"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/sakn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintVertical_bias="0.296" />
 
     <TextView
         android:id="@+id/jain"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="160dp"
         android:gravity="center"
         android:text="Jainam :  "
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintTop_toBottomOf="@+id/sak" />
 
     <TextView
         android:id="@+id/rajn"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="168dp"
         android:gravity="center"
         android:text="Raj :  "
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.189" />
 
     <TextView
         android:id="@+id/sakn"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="480dp"
         android:gravity="center"
         android:text="Sakshi :  "
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.075"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295" />
+        app:layout_constraintTop_toBottomOf="@+id/rajn"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/jai"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:gravity="center"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="22dp"
         android:contextClickable="true"
+        android:gravity="center"
         android:text="8369512553 "
         android:textAlignment="center"
         android:textColor="#FF00FFE8"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintStart_toEndOf="@+id/jain"
+        app:layout_constraintTop_toBottomOf="@+id/sak" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="208dp"
         android:gravity="center"
         android:text="Talk to our Tech team for\n any queries related to \napp or  for any suggesions "
         android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintTop_toBottomOf="@+id/jai" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -136,60 +135,49 @@
         android:gravity="center"
         android:text="contact us at :  "
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="36dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.092" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="144dp"
         android:gravity="center"
         android:text="Mail us at :  "
         android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="92dp"
         android:gravity="center"
         android:text="querify69@gmail.com"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="32dp"
+        android:textColor="#FF00FFE8"
+        android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="127dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:srcCompat="@drawable/gmail" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

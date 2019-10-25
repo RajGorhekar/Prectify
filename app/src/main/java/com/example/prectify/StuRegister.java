@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -81,6 +82,16 @@ public class StuRegister extends AppCompatActivity {
                 overridePendingTransition(0,0);
                 finish();
 
+            }
+        });
+        findViewById(R.id.textView22).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent( StuRegister.this , StuLogin.class );
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
             }
         });
 

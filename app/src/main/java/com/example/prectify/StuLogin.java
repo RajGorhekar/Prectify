@@ -73,6 +73,17 @@ public class StuLogin extends AppCompatActivity {
                 finish();
             }
         } );
+
+        findViewById(R.id.textView5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent( StuLogin.this , StuRegister.class );
+                startActivity(intent);
+                overridePendingTransition(0,0);
+                finish();
+            }
+        });
         if(sp.getBoolean("logged",true)){
             goToMainActivity();
         }

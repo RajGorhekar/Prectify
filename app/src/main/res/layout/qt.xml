@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selecttype">
+
+    <ImageView
+
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/applogo" />
+
+    <Button
+        android:layout_width="234dp"
+        android:id="@+id/radioButton"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/buttonshape"
+        android:text="A C A D E M I C S"
+        android:drawableStart="@drawable/aca"
+        android:padding="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/radioButton2"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttonshape"
+        android:text="T E C H N I C A L"
+        android:drawableStart="@drawable/tech"
+        android:padding="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/radioButton3"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttonshape"
+        android:drawableStart="@drawable/hyg"
+        android:padding="15dp"
+        android:text=" H Y G I E N E "
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/radioButton4"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttonshape"
+        android:text="F O O D"
+        android:drawableStart="@drawable/food"
+        android:padding="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/radioButton6"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="50dp"
+        android:drawableStart="@drawable/oth"
+        android:padding="15dp"
+        android:background="@drawable/buttonshape"
+        android:text="O T H E R S"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

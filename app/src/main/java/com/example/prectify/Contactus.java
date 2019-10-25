@@ -10,13 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Contactus extends AppCompatActivity {
- ImageView mail;
+
  TextView raj,sak,jai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactus);
-        mail =findViewById(R.id.imageView4);
         raj =findViewById(R.id.raj);
         jai =findViewById(R.id.jai);
         sak =findViewById(R.id.sak);
@@ -55,7 +54,7 @@ public class Contactus extends AppCompatActivity {
             }
         });*/
 
-        mail.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.textView15).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

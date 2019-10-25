@@ -107,5 +107,12 @@
     <string name="tve_email"> Email :</string>
     <string name="uid"> UID : </string>
     <string name="status">status </string>
+    <string-array name="type">
+        <item>Academics</item>
+        <item>Technical</item>
+        <item>Hygiene</item>
+        <item>Food</item>
+        <item>Others</item>
+    </string-array>
 
 </resources>

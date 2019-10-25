@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference databaseReference;
     FirebaseUser firebaseUser;
     User User2;
+    String abc;
+
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onClick(View v) {
                     Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    vibe.vibrate(300);
+                    vibe.vibrate(200);
                 }
             });
             fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
@@ -127,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 setHeader();
             }
             else{
+                Intent i = getIntent();
+                abc = i.getStringExtra("type");
                 setHeader();
             }
             firebaseAuth = FirebaseAuth.getInstance();
@@ -167,10 +171,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     myUserList.clear();
-                    for(DataSnapshot itemsnapshot:dataSnapshot.getChildren()){
-                        UserData userData=itemsnapshot.getValue(UserData.class);
-                        myUserList.add(userData);
+                    if(firebaseUser==null){
+                        for (DataSnapshot itemsnapshot : dataSnapshot.getChildren()) {
+                            UserData userData = itemsnapshot.getValue(UserData.class);
+                            if(userData.getqTitle().equals(abc))
+                            myUserList.add(userData);
 
+                        }
+                    }else {
+                        for (DataSnapshot itemsnapshot : dataSnapshot.getChildren()) {
+                            UserData userData = itemsnapshot.getValue(UserData.class);
+                            myUserList.add(userData);
+
+                        }
                     }
                     myAdapter.notifyDataSetChanged();
                     progressDialog.dismiss();
@@ -185,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             txtsearch.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -255,11 +269,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setHeader(){
         if(firebaseUser == null){
             hemail.setVisibility(View.GONE);
-            huid.setVisibility(View.GONE);
+            huid.setText("Type : " +abc);
             hname.setText("FACULTY");
-            View headerview=navigationView.getHeaderView(0);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            }
 
         }
         else {
@@ -316,12 +327,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (id == R.id.search_button) {
-            if(txtsearch.getVisibility()== View.VISIBLE){
-                txtsearch.setVisibility(View.GONE);
-                txtsearch.setText("");
+            if(FirebaseAuth.getInstance().getCurrentUser() == null){
+                AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+                pictureDialog.setTitle("You are logged in as a Faculty for " + abc);
+                pictureDialog.setIcon(R.drawable.change);
+                pictureDialog.setMessage("Touch anywhere to continue");
+                pictureDialog.create() .show();
+
             }
-            else if (txtsearch.getVisibility()== View.GONE){
-                txtsearch.setVisibility(View.VISIBLE);
+            else {
+                if (txtsearch.getVisibility() == View.VISIBLE) {
+                    txtsearch.setVisibility(View.GONE);
+                    txtsearch.setText("");
+                } else if (txtsearch.getVisibility() == View.GONE) {
+                    txtsearch.setVisibility(View.VISIBLE);
+                }
             }
             return true;
         }
@@ -372,9 +392,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
-                pictureDialog.setIcon(R.drawable.change);
-                pictureDialog.setMessage("Touch anywhere to continue");
-                pictureDialog.create() .show();
+                pictureDialog.setMessage("");
+                pictureDialog.show();
                 item.setEnabled(false);
             }
             else {
@@ -387,9 +406,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if(FirebaseAuth.getInstance().getCurrentUser() == null){
                 AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
                 pictureDialog.setTitle("You are logged in as a Faculty");
-                pictureDialog.setIcon(R.drawable.change);
-                pictureDialog.setMessage("Touch anywhere to continue");
-                pictureDialog.create() .show();
+                pictureDialog.setMessage("");
+                pictureDialog.show();
                 item.setEnabled(false);
             }
             else {

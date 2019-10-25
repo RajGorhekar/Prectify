@@ -77,7 +77,6 @@ public class RaiseQuery extends AppCompatActivity {
         progressDialog =new ProgressDialog(this);
         progressDialog.setMessage("Data uploading...");
         Intent c =getIntent();
-
         qtype = c.getStringExtra("query_type");
         abc.setText(qtype);
 

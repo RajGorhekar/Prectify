@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selecttype">
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="76dp"
+        android:layout_height="81dp"
+        android:src="@drawable/applogo"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp" />
+
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="190dp"
+        android:text="About us : "
+        android:textColor="#000000"
+        android:textSize="32dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/about"
+        android:layout_width="254dp"
+        android:layout_height="437dp"
+        android:layout_marginLeft="139dp"
+        android:layout_marginTop="10dp"
+        android:text="A college grievance reporting app in which the user can add a description as well a photograph of the problems faced in college and that problem will then be addressed to the concerned authority through our app"
+        android:textColor="#FFFFFF"
+        android:textSize="28dp" />
+</LinearLayout>

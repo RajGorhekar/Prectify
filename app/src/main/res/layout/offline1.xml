@@ -40,7 +40,7 @@
         android:layout_marginTop="60dp"
         android:text="No Internet Connection Found .\nCheck your Connection and\n Try Again"
         android:textAlignment="center"
-        android:textColor="#E55094"
+        android:textColor="#CC327A"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
