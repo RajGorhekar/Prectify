@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences spr;
     SharedPreferences fl;
     SharedPreferences sf;
+
     private ValueEventListener eventListener;
     SwipeRefreshLayout s;
     ProgressDialog progressDialog ;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     EditText txtsearch;
     MyAdapter myAdapter;
     String name;
+
     RecyclerView mRecyclerView;
     List<UserData> myUserList;
     UserData mUserData;
@@ -112,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
             fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
             sf=getSharedPreferences("sflogin",MODE_PRIVATE);
+            fl.edit().putBoolean("Faclogged",false).apply();
+            sf.edit().putBoolean("sflogged",false).apply();
             progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Loading Contents...");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -253,6 +257,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.setCancelable( false );
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    fl.edit().putBoolean("Faclogged",false).apply();
+                    sf.edit().putBoolean("sflogged",false).apply();
                     finishAndRemoveTask();
                 }
             });

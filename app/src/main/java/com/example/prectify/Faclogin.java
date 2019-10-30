@@ -42,9 +42,11 @@ public class Faclogin extends AppCompatActivity implements AdapterView.OnItemSel
         spin=findViewById(R.id.spinner);
         fl=getSharedPreferences("Faclogin",MODE_PRIVATE);
         sf=getSharedPreferences("sflogin",MODE_PRIVATE);
-        if(sf.getBoolean("sflogged",true) && fl.getBoolean("Faclogged",true)){
+        fl.edit().putBoolean("Faclogged",false).apply();
+        sf.edit().putBoolean("sflogged",false).apply();
+        /*if(sf.getBoolean("sflogged",true) && fl.getBoolean("Faclogged",true)){
             goToMainActivity();
-        }
+        }*/
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.type,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);

@@ -31,10 +31,11 @@ public class SelectType extends AppCompatActivity {
             btnfaculty = findViewById(R.id.button1);
             st=getSharedPreferences("stlogin",MODE_PRIVATE);
             sf=getSharedPreferences("sflogin",MODE_PRIVATE);
+            sf.edit().putBoolean("sflogged",false).apply();
 
-            if(sf.getBoolean("sflogged",true)){
+            /*if(sf.getBoolean("sflogged",false)){
                 goToFaclogin();
-            }
+            }*/
 
             if(st.getBoolean("stlogged",true)){
                 goToMainActivity();
