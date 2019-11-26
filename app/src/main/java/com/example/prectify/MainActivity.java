@@ -135,6 +135,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else{
                 Intent i = getIntent();
                 abc = i.getStringExtra("type");
+                /*if(abc == null){
+                    Intent intent;
+                    intent = new Intent(MainActivity.this, SelectType.class);
+                    startActivity(intent);
+                    finish();
+                    fl.edit().putBoolean("Faclogged",false).apply();
+                    sf.edit().putBoolean("sflogged",false).apply();
+                }*/
                 setHeader();
             }
             firebaseAuth = FirebaseAuth.getInstance();
