@@ -3,15 +3,16 @@ A college grievance reporting app in which the user can add a description as wel
 
 The following are the few Sreenshots of our application :
 
-splash screen 
+Splash screen
 ![Screenshot_2019-12-26-01-30-48-499_com picsart studio](https://user-images.githubusercontent.com/58221273/71450121-60694e80-2781-11ea-91c9-580286232a2e.png)
 
-login and signup screen
+Login and signup screen for student side
+![Screenshot_2019-12-26-01-32-15-981_com picsart studio (1)](https://user-images.githubusercontent.com/58221273/71450219-8263d080-2783-11ea-929e-b15e3abab77f.png)
 
-home screen and logout and settings option
+Home screen and logout and settings option
 ![Screenshot_2019-12-26-01-40-04-582_com picsart studio](https://user-images.githubusercontent.com/58221273/71450120-60694e80-2781-11ea-86c5-efbbefc25c8e.png)
 
-activity to select Query type and to post Query
+Activity to select Query type and to post Query
 ![Screenshot_2019-12-26-01-33-43-470_com picsart studio](https://user-images.githubusercontent.com/58221273/71450122-6101e500-2781-11ea-9c40-a6c7f0094894.png)
 
 Faculty side login and Side Navigation bar
