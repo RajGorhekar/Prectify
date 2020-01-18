@@ -6,7 +6,7 @@ The following are the few Sreenshots of our application :
 Splash screen : 
 ![Screenshot_2019-12-26-01-30-48-499_com picsart studio](https://user-images.githubusercontent.com/58221273/71450121-60694e80-2781-11ea-91c9-580286232a2e.png)
 
-Login and signup screen for student side
+Login and signup screen for student side : 
 ![Screenshot_2019-12-26-01-32-15-981_com picsart studio (1)](https://user-images.githubusercontent.com/58221273/71450219-8263d080-2783-11ea-929e-b15e3abab77f.png)
 
 Home screen and logout and settings option
