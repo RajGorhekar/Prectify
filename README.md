@@ -15,7 +15,7 @@ Home screen and logout and settings option :
 Activity to select Query type and to post Query : 
 ![Screenshot_2019-12-26-01-33-43-470_com picsart studio](https://user-images.githubusercontent.com/58221273/71450122-6101e500-2781-11ea-9c40-a6c7f0094894.png)
 
-Faculty side login and Side Navigation bar
+Faculty side login and Side Navigation bar : 
 ![Screenshot_2019-12-26-01-34-59-913_com picsart studio](https://user-images.githubusercontent.com/58221273/71450118-60694e80-2781-11ea-9e3f-7a0da7c6f7c7.png)
 
 Dialog box to change satatus of queries for faculty side and share app
