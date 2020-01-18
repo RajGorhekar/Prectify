@@ -3,7 +3,7 @@ A college grievance reporting app in which the user can add a description as wel
 
 The following are the few Sreenshots of our application :
 
-Splash screen
+Splash screen : 
 ![Screenshot_2019-12-26-01-30-48-499_com picsart studio](https://user-images.githubusercontent.com/58221273/71450121-60694e80-2781-11ea-91c9-580286232a2e.png)
 
 Login and signup screen for student side
