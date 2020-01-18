@@ -12,7 +12,7 @@ Login and signup screen for student side :
 Home screen and logout and settings option : 
 ![Screenshot_2019-12-26-01-40-04-582_com picsart studio](https://user-images.githubusercontent.com/58221273/71450120-60694e80-2781-11ea-86c5-efbbefc25c8e.png)
 
-Activity to select Query type and to post Query
+Activity to select Query type and to post Query : 
 ![Screenshot_2019-12-26-01-33-43-470_com picsart studio](https://user-images.githubusercontent.com/58221273/71450122-6101e500-2781-11ea-9c40-a6c7f0094894.png)
 
 Faculty side login and Side Navigation bar
