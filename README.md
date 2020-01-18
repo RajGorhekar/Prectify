@@ -18,6 +18,6 @@ Activity to select Query type and to post Query :
 Faculty side login and Side Navigation bar : 
 ![Screenshot_2019-12-26-01-34-59-913_com picsart studio](https://user-images.githubusercontent.com/58221273/71450118-60694e80-2781-11ea-9e3f-7a0da7c6f7c7.png)
 
-Dialog box to change satatus of queries for faculty side and share app
+Dialog box to change satatus of queries for faculty side and share app : 
 ![IMG_20191226_013656](https://user-images.githubusercontent.com/58221273/71450119-60694e80-2781-11ea-9cb3-50c9fb331d77.jpg)
 
