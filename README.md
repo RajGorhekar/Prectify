@@ -9,7 +9,7 @@ Splash screen :
 Login and signup screen for student side : 
 ![Screenshot_2019-12-26-01-32-15-981_com picsart studio (1)](https://user-images.githubusercontent.com/58221273/71450219-8263d080-2783-11ea-929e-b15e3abab77f.png)
 
-Home screen and logout and settings option
+Home screen and logout and settings option : 
 ![Screenshot_2019-12-26-01-40-04-582_com picsart studio](https://user-images.githubusercontent.com/58221273/71450120-60694e80-2781-11ea-86c5-efbbefc25c8e.png)
 
 Activity to select Query type and to post Query
